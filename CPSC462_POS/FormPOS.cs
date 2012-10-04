@@ -11,14 +11,33 @@ namespace CPSC462_POS
 {
     public partial class FormPOS : Form
     {
+
         public FormPOS()
         {
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void tbItemNo_Leave(object sender, EventArgs e)
         {
-
+            // will replace all below with database query code
+            tbQuantity.Text = (tbQuantity.Text == "" ? "1" : tbQuantity.Text);
+            if (tbItemNo.Text == "1234")
+            {
+                dgItemLine.Rows.Add(tbItemNo.Text, "Chinese iPad", tbQuantity.Text, "1", "1.00");
+                tbItemNo.Clear();
+            }
         }
+
+        private void tbItemNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                tbItemNo_Leave(sender, e);
+            }
+        }
+
+
+
+
     }
 }

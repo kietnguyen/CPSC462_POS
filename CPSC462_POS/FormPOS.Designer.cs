@@ -28,20 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblItemNo = new System.Windows.Forms.Label();
             this.tbItemNo = new System.Windows.Forms.TextBox();
             this.dgItemLine = new System.Windows.Forms.DataGridView();
+            this.ItemNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnChangeQuantity = new System.Windows.Forms.Button();
             this.lblSubtotal = new System.Windows.Forms.Label();
             this.btnMakePayment = new System.Windows.Forms.Button();
             this.btnVoidSale = new System.Windows.Forms.Button();
             this.lblTax = new System.Windows.Forms.Label();
-            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblFinalTotal = new System.Windows.Forms.Label();
             this.tbSubtotal = new System.Windows.Forms.TextBox();
             this.tbTax = new System.Windows.Forms.TextBox();
             this.tbTotal = new System.Windows.Forms.TextBox();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.tbQuantity = new System.Windows.Forms.TextBox();
+            this.btnPrintReceipt = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgItemLine)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,21 +67,84 @@
             // 
             this.tbItemNo.Location = new System.Drawing.Point(8, 31);
             this.tbItemNo.Name = "tbItemNo";
-            this.tbItemNo.Size = new System.Drawing.Size(366, 20);
+            this.tbItemNo.Size = new System.Drawing.Size(369, 20);
             this.tbItemNo.TabIndex = 0;
+            this.tbItemNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbItemNo_KeyPress);
+            this.tbItemNo.Leave += new System.EventHandler(this.tbItemNo_Leave);
             // 
             // dgItemLine
             // 
+            this.dgItemLine.AllowUserToResizeColumns = false;
+            this.dgItemLine.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgItemLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgItemLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItemLine.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ItemNo,
+            this.Description,
+            this.Quantity,
+            this.Price,
+            this.Total});
+            this.dgItemLine.Cursor = System.Windows.Forms.Cursors.Default;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgItemLine.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgItemLine.Location = new System.Drawing.Point(8, 61);
+            this.dgItemLine.Margin = new System.Windows.Forms.Padding(0);
             this.dgItemLine.Name = "dgItemLine";
-            this.dgItemLine.Size = new System.Drawing.Size(366, 201);
+            this.dgItemLine.RowHeadersVisible = false;
+            this.dgItemLine.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgItemLine.Size = new System.Drawing.Size(369, 200);
             this.dgItemLine.TabIndex = 20;
-            this.dgItemLine.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // ItemNo
+            // 
+            this.ItemNo.HeaderText = "Item No";
+            this.ItemNo.Name = "ItemNo";
+            this.ItemNo.ReadOnly = true;
+            this.ItemNo.Width = 80;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            this.Description.Width = 120;
+            // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            this.Quantity.Width = 52;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            this.Price.Width = 54;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.Width = 60;
             // 
             // btnChangeQuantity
             // 
-            this.btnChangeQuantity.Location = new System.Drawing.Point(381, 61);
+            this.btnChangeQuantity.Location = new System.Drawing.Point(385, 61);
             this.btnChangeQuantity.Name = "btnChangeQuantity";
             this.btnChangeQuantity.Size = new System.Drawing.Size(86, 36);
             this.btnChangeQuantity.TabIndex = 30;
@@ -84,7 +155,7 @@
             // 
             this.lblSubtotal.AutoSize = true;
             this.lblSubtotal.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubtotal.Location = new System.Drawing.Point(317, 272);
+            this.lblSubtotal.Location = new System.Drawing.Point(319, 274);
             this.lblSubtotal.Name = "lblSubtotal";
             this.lblSubtotal.Size = new System.Drawing.Size(60, 18);
             this.lblSubtotal.TabIndex = 4;
@@ -92,7 +163,7 @@
             // 
             // btnMakePayment
             // 
-            this.btnMakePayment.Location = new System.Drawing.Point(381, 103);
+            this.btnMakePayment.Location = new System.Drawing.Point(385, 145);
             this.btnMakePayment.Name = "btnMakePayment";
             this.btnMakePayment.Size = new System.Drawing.Size(86, 36);
             this.btnMakePayment.TabIndex = 40;
@@ -101,7 +172,7 @@
             // 
             // btnVoidSale
             // 
-            this.btnVoidSale.Location = new System.Drawing.Point(381, 145);
+            this.btnVoidSale.Location = new System.Drawing.Point(385, 103);
             this.btnVoidSale.Name = "btnVoidSale";
             this.btnVoidSale.Size = new System.Drawing.Size(86, 36);
             this.btnVoidSale.TabIndex = 50;
@@ -112,26 +183,26 @@
             // 
             this.lblTax.AutoSize = true;
             this.lblTax.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTax.Location = new System.Drawing.Point(349, 290);
+            this.lblTax.Location = new System.Drawing.Point(351, 292);
             this.lblTax.Name = "lblTax";
             this.lblTax.Size = new System.Drawing.Size(28, 18);
             this.lblTax.TabIndex = 7;
             this.lblTax.Text = "Tax";
             // 
-            // lblTotal
+            // lblFinalTotal
             // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(318, 308);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(59, 23);
-            this.lblTotal.TabIndex = 8;
-            this.lblTotal.Text = "TOTAL";
+            this.lblFinalTotal.AutoSize = true;
+            this.lblFinalTotal.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinalTotal.Location = new System.Drawing.Point(269, 312);
+            this.lblFinalTotal.Name = "lblFinalTotal";
+            this.lblFinalTotal.Size = new System.Drawing.Size(110, 23);
+            this.lblFinalTotal.TabIndex = 8;
+            this.lblFinalTotal.Text = "FINAL TOTAL";
             // 
             // tbSubtotal
             // 
             this.tbSubtotal.Enabled = false;
-            this.tbSubtotal.Location = new System.Drawing.Point(380, 268);
+            this.tbSubtotal.Location = new System.Drawing.Point(385, 272);
             this.tbSubtotal.Name = "tbSubtotal";
             this.tbSubtotal.Size = new System.Drawing.Size(86, 20);
             this.tbSubtotal.TabIndex = 60;
@@ -139,7 +210,7 @@
             // tbTax
             // 
             this.tbTax.Enabled = false;
-            this.tbTax.Location = new System.Drawing.Point(380, 286);
+            this.tbTax.Location = new System.Drawing.Point(385, 290);
             this.tbTax.Name = "tbTax";
             this.tbTax.Size = new System.Drawing.Size(86, 20);
             this.tbTax.TabIndex = 70;
@@ -147,7 +218,7 @@
             // tbTotal
             // 
             this.tbTotal.Enabled = false;
-            this.tbTotal.Location = new System.Drawing.Point(380, 309);
+            this.tbTotal.Location = new System.Drawing.Point(385, 312);
             this.tbTotal.Name = "tbTotal";
             this.tbTotal.Size = new System.Drawing.Size(86, 20);
             this.tbTotal.TabIndex = 80;
@@ -156,7 +227,7 @@
             // 
             this.lblQuantity.AutoSize = true;
             this.lblQuantity.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuantity.Location = new System.Drawing.Point(377, 8);
+            this.lblQuantity.Location = new System.Drawing.Point(381, 9);
             this.lblQuantity.Name = "lblQuantity";
             this.lblQuantity.Size = new System.Drawing.Size(65, 19);
             this.lblQuantity.TabIndex = 12;
@@ -164,22 +235,32 @@
             // 
             // tbQuantity
             // 
-            this.tbQuantity.Location = new System.Drawing.Point(380, 30);
+            this.tbQuantity.Location = new System.Drawing.Point(385, 31);
             this.tbQuantity.Name = "tbQuantity";
             this.tbQuantity.Size = new System.Drawing.Size(85, 20);
             this.tbQuantity.TabIndex = 10;
+            // 
+            // btnPrintReceipt
+            // 
+            this.btnPrintReceipt.Location = new System.Drawing.Point(385, 187);
+            this.btnPrintReceipt.Name = "btnPrintReceipt";
+            this.btnPrintReceipt.Size = new System.Drawing.Size(86, 36);
+            this.btnPrintReceipt.TabIndex = 81;
+            this.btnPrintReceipt.Text = "Print Receipt";
+            this.btnPrintReceipt.UseVisualStyleBackColor = true;
             // 
             // FormPOS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(475, 339);
+            this.ClientSize = new System.Drawing.Size(480, 339);
+            this.Controls.Add(this.btnPrintReceipt);
             this.Controls.Add(this.tbQuantity);
             this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.tbTotal);
             this.Controls.Add(this.tbTax);
             this.Controls.Add(this.tbSubtotal);
-            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.lblFinalTotal);
             this.Controls.Add(this.lblTax);
             this.Controls.Add(this.btnVoidSale);
             this.Controls.Add(this.btnMakePayment);
@@ -206,12 +287,18 @@
         private System.Windows.Forms.Button btnMakePayment;
         private System.Windows.Forms.Button btnVoidSale;
         private System.Windows.Forms.Label lblTax;
-        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label lblFinalTotal;
         private System.Windows.Forms.TextBox tbSubtotal;
         private System.Windows.Forms.TextBox tbTax;
         private System.Windows.Forms.TextBox tbTotal;
         private System.Windows.Forms.Label lblQuantity;
         private System.Windows.Forms.TextBox tbQuantity;
+        private System.Windows.Forms.Button btnPrintReceipt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
     }
 }
 
