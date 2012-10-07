@@ -16,7 +16,7 @@ namespace CPSC462_POS
             this.registerId = registerId;
         }
 
-        public int getRegisterId()
+        public int getId()
         {
             return registerId;
         }

@@ -7,7 +7,7 @@ namespace CPSC462_POS
 {
     class SalesLineItem
     {
-        private int qty {set; get;}
+        private int qty;
         private Item item;
 
         public SalesLineItem()

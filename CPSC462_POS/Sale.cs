@@ -15,9 +15,16 @@ namespace CPSC462_POS
 
         public Sale()
         {
-            date = DateTime.Now;
-            tax = 0;
-            item_list = new List<SalesLineItem>();
+            this.date = DateTime.Now;
+            this.tax = 0;
+            this.item_list = new List<SalesLineItem>();
+        }
+
+        public Sale(decimal tax)
+        {
+            this.date = DateTime.Now;
+            this.tax = tax;
+            this.item_list = new List<SalesLineItem>();
         }
 
         public decimal getSubTotal()
@@ -109,7 +116,7 @@ namespace CPSC462_POS
             if (lineItem == null) return;
             SalesLineItem foundLineItem = findLineItem(lineItem.getItem().getID());
             if (foundLineItem == null) return;
-            if (lineItem.getQty() == 0) 
+            if (lineItem.getQty() == 0)
                 item_list.Remove(foundLineItem);
             else
                 foundLineItem.setQty(lineItem.getQty());

@@ -21,6 +21,14 @@ namespace CPSC462_POS
 
         }
 
+        public Item(int id, String name, string desc, decimal price)
+        {
+            this.id = id;
+            this.name = name;
+            this.desc = desc;
+            this.price = price;
+        }
+
         public decimal getPrice()
         {
             return this.price;

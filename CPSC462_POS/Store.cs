@@ -25,9 +25,14 @@ namespace CPSC462_POS
             return registers.Count();
         }
 
+        public List<Register> getRegisters()
+        {
+            return this.registers;
+        }
+
         public bool addRegister(Register register)
         {
-            // need to remove in database
+            // mask register "using"
             registers.Add(register);
 
             return true;
@@ -44,7 +49,7 @@ namespace CPSC462_POS
             }
             else
             {
-                Debug.WriteLine("Register {0} is not existed!", register.getRegisterId());
+                Debug.WriteLine("Register {0} is not existed!", register.getId());
                 return false;
             }
 
@@ -54,8 +59,9 @@ namespace CPSC462_POS
         {
             foreach (Register aRegister in registers)
             {
-                if (aRegister.getRegisterId() == registerId)
+                if (aRegister.getId() == registerId)
                 {
+                    // mask register "not_using"
                     registers.Remove(aRegister);
                     return true;
                 }

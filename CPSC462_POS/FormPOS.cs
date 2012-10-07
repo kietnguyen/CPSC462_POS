@@ -90,6 +90,7 @@ namespace CPSC462_POS
 
         private void dgItemLine_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
             DataGridViewRow row = dgItemLine.Rows[e.RowIndex];
             tbItemNo.Text = row.Cells[0].Value.ToString();
             tbQuantity.Text = row.Cells[2].Value.ToString();

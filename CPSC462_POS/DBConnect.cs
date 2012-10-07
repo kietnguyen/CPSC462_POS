@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace CPSC462_POS
 {
@@ -74,7 +75,7 @@ namespace CPSC462_POS
             }
             catch (MySqlException ex)
             {
-                //MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
