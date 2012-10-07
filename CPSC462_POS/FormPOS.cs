@@ -23,14 +23,14 @@ namespace CPSC462_POS
             tbQuantity.Text = (tbQuantity.Text == "" ? "1" : tbQuantity.Text);
             if (tbItemNo.Text == "1234")
             {
-                dgItemLine.Rows.Add(tbItemNo.Text, "Chinese iPad", tbQuantity.Text, "1", "1.00");
+                dgItemLine.Rows.Add(tbItemNo.Text, "Chinese iPad", tbQuantity.Text, 1.00, "1.00");
                 tbItemNo.Clear();
             }
         }
 
         private void tbItemNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Return || e.KeyChar == (char)Keys.Enter)
             {
                 tbItemNo_Leave(sender, e);
             }

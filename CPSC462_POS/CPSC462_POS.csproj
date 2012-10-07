@@ -46,14 +46,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cash.cs" />
+    <Compile Include="Cashier.cs" />
+    <Compile Include="CreditCard.cs" />
+    <Compile Include="DBConnect.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="FormPOS.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPOS.Designer.cs">
       <DependentUpon>FormPOS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface1.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Manager.cs" />
+    <Compile Include="PaymentMethod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register.cs" />
+    <Compile Include="Sale.cs" />
+    <Compile Include="SalesLineItem.cs" />
+    <Compile Include="Store.cs" />
     <EmbeddedResource Include="FormPOS.resx">
       <DependentUpon>FormPOS.cs</DependentUpon>
     </EmbeddedResource>

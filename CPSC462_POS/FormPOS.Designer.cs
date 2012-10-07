@@ -105,6 +105,7 @@
             this.dgItemLine.Name = "dgItemLine";
             this.dgItemLine.RowHeadersVisible = false;
             this.dgItemLine.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgItemLine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgItemLine.Size = new System.Drawing.Size(369, 200);
             this.dgItemLine.TabIndex = 20;
             // 
