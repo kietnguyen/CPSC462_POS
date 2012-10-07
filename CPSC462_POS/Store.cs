@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using System.Diagnostics;
 
 namespace CPSC462_POS
 {
@@ -10,13 +11,18 @@ namespace CPSC462_POS
     {
         private string name;
         private string address;
-        private ArrayList registers;
+        private List<Register> registers;
 
         public Store(string name, string address)
         {
             this.name = name;
             this.address = address;
-            this.registers = new ArrayList();
+            this.registers = new List<Register>();
+        }
+
+        public int getNumberOfRegisters()
+        {
+            return registers.Count();
         }
 
         public bool addRegister(Register register)
@@ -29,16 +35,34 @@ namespace CPSC462_POS
 
         public bool removeRegister(Register register)
         {
+            int numberOfRegister = getNumberOfRegisters();
             registers.Remove(register);
 
-            return true;
+            if (numberOfRegister == registers.Count - 1)
+            {
+                return true;
+            }
+            else
+            {
+                Debug.WriteLine("Register {0} is not existed!", register.getRegisterId());
+                return false;
+            }
+
         }
 
         public bool removeRegister(int registerId)
         {
-            registers.RemoveAt(registerId);
+            foreach (Register aRegister in registers)
+            {
+                if (aRegister.getRegisterId() == registerId)
+                {
+                    registers.Remove(aRegister);
+                    return true;
+                }
 
-            return true;
+            }
+
+            return false;
         }
     }
 }

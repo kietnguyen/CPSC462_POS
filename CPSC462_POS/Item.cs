@@ -8,8 +8,8 @@ namespace CPSC462_POS
     class Item
     {
         protected int id;
-        protected String name;
-        protected String desc;
+        protected String name = "";
+        protected String desc = "";
         protected decimal price;
 
         public Item(int product_id)
