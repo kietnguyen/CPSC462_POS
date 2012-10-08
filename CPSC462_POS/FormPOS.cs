@@ -58,6 +58,8 @@ namespace CPSC462_POS
                 return null;
             }
 
+            if (quantity < 0) return null;
+
             try
             {
                 itemNo = Convert.ToInt32(tbItemNo.Text);
@@ -81,9 +83,9 @@ namespace CPSC462_POS
                 dgItemLine.Rows.Add(aItem.getID(), aItem.getDesc(), lineItem.getQty(),
                                     aItem.getPrice().ToString("C"), lineItem.getPrice().ToString("C"));
             }
-            tbSubtotal.Text = aSale.getSubTotal().ToString("C");
-            tbTax.Text = aSale.getTax().ToString("C");
-            tbTotal.Text = aSale.getTotal().ToString("C");
+            tbSubtotal.Text = aSale.subTotal.ToString("C");
+            tbTax.Text = aSale.tax.ToString("C");
+            tbTotal.Text = aSale.total.ToString("C");
 
             dgItemLine.ClearSelection();
         }

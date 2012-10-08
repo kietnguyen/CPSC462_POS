@@ -30,83 +30,114 @@ namespace CPSC462_POS_Test
             Sale target = new Sale();
             Assert.AreEqual(0, target.getItems().Count);
 
-            target.add_item(new SalesLineItem(1234,1));
+            target.add_item(new SalesLineItem(1234, 1));
             Assert.AreEqual(1, target.getItems().Count);
-        }
 
-        [TestMethod()]
-        [DeploymentItem("CPSC462_POS.exe")]
-        public void findLineItemTest()
-        {
-            Sale_Accessor target = new Sale_Accessor(); // TODO: Initialize to an appropriate value
-            int product_id = 0; // TODO: Initialize to an appropriate value
-            SalesLineItem_Accessor expected = null; // TODO: Initialize to an appropriate value
-            SalesLineItem_Accessor actual;
-            actual = target.findLineItem(product_id);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
+            target.add_item(new SalesLineItem(1234, 2));
+            Assert.AreEqual(1, target.getItems().Count);
+            Assert.AreEqual(3, target.getItems().ToArray()[0].getQty());
 
-        [TestMethod()]
-        public void getItemsTest()
-        {
-            Sale target = new Sale(); // TODO: Initialize to an appropriate value
-            List<SalesLineItem> expected = null; // TODO: Initialize to an appropriate value
-            List<SalesLineItem> actual;
-            actual = target.getItems();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
+            target.add_item(new SalesLineItem(2345, 3));
+            Assert.AreEqual(2, target.getItems().Count);
 
-        [TestMethod()]
-        public void getSubTotalTest()
-        {
-            Sale target = new Sale(); // TODO: Initialize to an appropriate value
-            Decimal expected = new Decimal(); // TODO: Initialize to an appropriate value
-            Decimal actual;
-            actual = target.getSubTotal();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        [TestMethod()]
-        public void getTaxTest()
-        {
-            Sale target = new Sale(); // TODO: Initialize to an appropriate value
-            Decimal expected = new Decimal(); // TODO: Initialize to an appropriate value
-            Decimal actual;
-            actual = target.getTax();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        [TestMethod()]
-        public void getTotalTest()
-        {
-            Sale target = new Sale(); // TODO: Initialize to an appropriate value
-            Decimal expected = new Decimal(); // TODO: Initialize to an appropriate value
-            Decimal actual;
-            actual = target.getTotal();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            target.add_item(new SalesLineItem(3456, 0));
+            Assert.AreEqual(2, target.getItems().Count);
         }
 
         [TestMethod()]
         public void remove_itemTest()
         {
-            Sale target = new Sale(); // TODO: Initialize to an appropriate value
-            SalesLineItem lineItem = null; // TODO: Initialize to an appropriate value
-            target.remove_item(lineItem);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            Sale target = new Sale();
+            target.add_item(new SalesLineItem(1234, 1));
+            target.add_item(new SalesLineItem(2345, 3));
+            target.add_item(new SalesLineItem(3456, 2));
+            Assert.AreEqual(3, target.getItems().Count);
+
+            target.remove_item(new SalesLineItem(1234, 1));
+            Assert.AreEqual(2, target.getItems().Count);
+            Assert.AreEqual(2345, target.getItems().ToArray()[0].getItem().getID());
+            Assert.AreEqual(3456, target.getItems().ToArray()[1].getItem().getID());
+
+            target.remove_item(new SalesLineItem(2345, 1));
+            Assert.AreEqual(2, target.getItems().Count);
+            Assert.AreEqual(2, target.getItems().ToArray()[0].getQty());
+
+            target.remove_item(new SalesLineItem(2345, 0));
+            Assert.AreEqual(2, target.getItems().Count);
+            Assert.AreEqual(2, target.getItems().ToArray()[0].getQty());
+
+            target.remove_item(new SalesLineItem(2345, 2));
+            Assert.AreEqual(1, target.getItems().Count);
+            Assert.AreEqual(3456, target.getItems().ToArray()[0].getItem().getID());
+        }
+
+        //[TestMethod()]
+        //[DeploymentItem("CPSC462_POS.exe")]
+        //public void findLineItemTest()
+        //{
+        //    Sale_Accessor target = new Sale_Accessor(); // TODO: Initialize to an appropriate value
+        //    int product_id = 0; // TODO: Initialize to an appropriate value
+        //    SalesLineItem_Accessor expected = null; // TODO: Initialize to an appropriate value
+        //    SalesLineItem_Accessor actual;
+        //    actual = target.findLineItem(product_id);
+        //    Assert.AreEqual(expected, actual);
+        //    Assert.Inconclusive("Verify the correctness of this test method.");
+        //}
+
+        //[TestMethod()]
+        //public void getItemsTest()
+        //{
+        //    Sale target = new Sale(); // TODO: Initialize to an appropriate value
+        //    List<SalesLineItem> expected = null; // TODO: Initialize to an appropriate value
+        //    List<SalesLineItem> actual;
+        //    actual = target.getItems();
+        //    Assert.AreEqual(expected, actual);
+        //    Assert.Inconclusive("Verify the correctness of this test method.");
+        //}
+
+        [TestMethod()]
+        public void subTotalTest()
+        {
+            Sale target = new Sale();
+            target.add_item(new SalesLineItem(1234, 1));
+            Assert.AreEqual("$1.00", target.subTotal.ToString("C"));
+
+            target.add_item(new SalesLineItem(2345, 3));
+            target.add_item(new SalesLineItem(3456, 2));
+            Assert.AreEqual("$6.00", target.subTotal.ToString("C"));
         }
 
         [TestMethod()]
-        public void update_itemTest()
+        public void taxTest()
         {
-            Sale target = new Sale(); // TODO: Initialize to an appropriate value
-            SalesLineItem lineItem = null; // TODO: Initialize to an appropriate value
-            target.update_item(lineItem);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            Sale target = new Sale();
+            target.add_item(new SalesLineItem(1234, 1));
+            Assert.AreEqual("$0.08", target.tax.ToString("C"));
+
+            target.add_item(new SalesLineItem(2345, 3));
+            target.add_item(new SalesLineItem(3456, 2));
+            Assert.AreEqual("$0.47", target.tax.ToString("C"));
         }
+
+        [TestMethod()]
+        public void totalTest()
+        {
+            Sale target = new Sale();
+            target.add_item(new SalesLineItem(1234, 1));
+            Assert.AreEqual("$1.08", target.total.ToString("C"));
+
+            target.add_item(new SalesLineItem(2345, 3));
+            target.add_item(new SalesLineItem(3456, 2));
+            Assert.AreEqual("$6.47", target.total.ToString("C"));
+        }
+
+        //[TestMethod()]
+        //public void update_itemTest()
+        //{
+        //    Sale target = new Sale(); // TODO: Initialize to an appropriate value
+        //    SalesLineItem lineItem = null; // TODO: Initialize to an appropriate value
+        //    target.update_item(lineItem);
+        //    Assert.Inconclusive("A method that does not return a value cannot be verified.");
+        //}
     }
 }

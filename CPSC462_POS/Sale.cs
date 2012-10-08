@@ -9,44 +9,72 @@ namespace CPSC462_POS
     class Sale
     {
         private DateTime date;
-        private decimal tax;
+        private decimal taxRate = 0.0775m;
         // change ArrayList to List: http://stackoverflow.com/questions/2309694/arraylist-vs-list-in-c-sharp
         private List<SalesLineItem> item_list;
+
+        public decimal subTotal
+        {
+            get
+            {
+                decimal total = 0m;
+
+                foreach (SalesLineItem lineItem in item_list)
+                {
+                    total += lineItem.getPrice();
+                }
+
+                return total;
+            }
+        }
+
+        public decimal total
+        {
+            get
+            {
+                return this.subTotal * (1 + taxRate);
+            }
+        }
+
+        public decimal tax
+        {
+            get
+            {
+                return this.subTotal * this.taxRate;
+            }
+        }
 
         public Sale()
         {
             this.date = DateTime.Now;
-            this.tax = 0;
+            this.taxRate = 0.0775m;
             this.item_list = new List<SalesLineItem>();
         }
 
-        public Sale(decimal tax)
+        public Sale(decimal taxRate)
         {
             this.date = DateTime.Now;
-            this.tax = tax;
+            this.taxRate = taxRate;
             this.item_list = new List<SalesLineItem>();
         }
 
-        public decimal getSubTotal()
+        public DateTime getSaleDate()
         {
-            decimal total = 0;
+            return this.date;
+        }
 
-            foreach (SalesLineItem lineItem in item_list)
-            {
-                total += lineItem.getPrice();
-            }
-
-            return total;
+        public decimal getSubTotal(){
+            return this.subTotal;
         }
 
         public decimal getTax()
         {
-            return getSubTotal() * this.tax;
+            return this.tax;
         }
 
         public decimal getTotal()
         {
-            return getSubTotal() * (1 + this.tax);
+            return this.total;
         }
 
         public List<SalesLineItem> getItems()
@@ -68,21 +96,14 @@ namespace CPSC462_POS
 
         public void add_item(int product_id, int qty)
         {
-            Boolean found = false;
-            foreach (SalesLineItem lineItem in item_list)
+            SalesLineItem foundLineItem = findLineItem(product_id);
+            if (foundLineItem == null)
             {
-                if (lineItem.getItem().getID() == product_id)
-                {
-                    lineItem.addQty(qty);
-                    found = true;
-                    break;
-                }
+                if (qty > 0)
+                    item_list.Add(new SalesLineItem(product_id, qty));
             }
-
-            if (!found)
-            {
-                item_list.Add(new SalesLineItem(product_id, qty));
-            }
+            else
+                foundLineItem.addQty(qty);
         }
 
         public void add_item(SalesLineItem lineItem)
@@ -93,16 +114,11 @@ namespace CPSC462_POS
 
         public void remove_item(int product_id, int qty)
         {
-            foreach (SalesLineItem lineItem in item_list)
-            {
-                if (lineItem.getItem().getID() == product_id)
-                {
-                    lineItem.removeQty(qty);
-                    if (lineItem.getQty() <= 0)
-                        item_list.Remove(lineItem);
-                    break;
-                }
-            }
+            SalesLineItem foundLineItem = findLineItem(product_id);
+            if (foundLineItem == null) return;
+            foundLineItem.removeQty(qty);
+            if (foundLineItem.getQty() <= 0) item_list.Remove(foundLineItem);
+
         }
 
         public void remove_item(SalesLineItem lineItem)

@@ -10,7 +10,7 @@ namespace CPSC462_POS
         protected int id;
         protected String name = "";
         protected String desc = "";
-        protected decimal price;
+        protected decimal price = 1m;
 
         public Item(int product_id)
         {
