@@ -8,10 +8,13 @@ namespace CPSC462_POS
 {
     class Sale
     {
+        const decimal DEFAULT_TAX_RATE = 0.08m;
         private DateTime date;
-        private decimal taxRate = 0.0775m;
+        private decimal taxRate = DEFAULT_TAX_RATE;
+
         // change ArrayList to List: http://stackoverflow.com/questions/2309694/arraylist-vs-list-in-c-sharp
         private List<SalesLineItem> item_list;
+        private int registerId;
 
         public decimal subTotal
         {
@@ -47,7 +50,7 @@ namespace CPSC462_POS
         public Sale()
         {
             this.date = DateTime.Now;
-            this.taxRate = 0.0775m;
+            this.taxRate = DEFAULT_TAX_RATE;
             this.item_list = new List<SalesLineItem>();
         }
 

@@ -7,9 +7,10 @@ namespace CPSC462_POS
 {
     public class Register
     {
-        private int registerId { get; set; }
-        private SalesLineItem sale { set; get; }
-        private int storeId { set; get; }
+        private int registerId;
+        private SalesLineItem sale;
+        private Store store;
+        private Cashier cashier;
 
         public Register(int registerId)
         {
@@ -20,5 +21,6 @@ namespace CPSC462_POS
         {
             return registerId;
         }
+
     }
 }

@@ -5,8 +5,10 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    interface IPaymentMethod
+
+    class Customer : Person
     {
-        void process(decimal amount);
+        private int customerId;
+
     }
 }

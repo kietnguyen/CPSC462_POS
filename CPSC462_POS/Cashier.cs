@@ -7,6 +7,12 @@ namespace CPSC462_POS
 {
     class Cashier : Employee
     {
-        
+        private Register workRegister;
+
+        public override void login()
+        {
+            base.login();
+        }
+
     }
 }

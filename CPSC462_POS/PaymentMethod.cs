@@ -7,6 +7,18 @@ namespace CPSC462_POS
 {
     public class PaymentMethod
     {
-        private decimal amount { get; set; }
+        private Sale sale;
+        public decimal amount
+        {
+            get
+            {
+                return sale.total;
+            }
+        }
+
+        public void process(decimal amount)
+        {
+            
+        }
     }
 }

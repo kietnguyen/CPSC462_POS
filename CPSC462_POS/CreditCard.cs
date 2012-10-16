@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class CreditCard
+    class CreditCard : PaymentMethod
     {
         public void process(int credit_card_no, int ccv, int month, int year)
         {

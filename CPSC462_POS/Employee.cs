@@ -5,15 +5,36 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class Employee
+    class Employee : Person
     {
         private int employeeId;
-        private string firstName { get; set; }
-        private string lastName { get; set; }
-        private DateTime dob { get; set; }
-        private string address { get; set; }
-        private decimal salary { get; set; }
+        private decimal salary;
+        public Store store { get; set; }
 
+        public Employee()
+        { 
+        }
 
+        public Employee(Store aStore, int eId, decimal salary)
+        {
+            this.employeeId = eId;
+            this.store = aStore;
+            this.salary = salary;
+        }
+
+        public int getEmployeeId()
+        {
+            return this.employeeId;
+        }
+
+        public virtual void login()
+        {
+
+        }
+
+        public virtual void logoff()
+        {
+
+        }
     }
 }

@@ -117,6 +117,11 @@ namespace CPSC462_POS
             updateLineItem();
         }
 
+        private void btnMakePayment_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Thank you for shopping.");
+        }
+
 
 
     }
