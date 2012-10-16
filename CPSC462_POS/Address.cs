@@ -10,7 +10,7 @@ namespace CPSC462_POS
     {
         private string _address1
         {
-            get;
+            get { return _address1; }
             set
             {
                 if (value != "")
@@ -20,7 +20,7 @@ namespace CPSC462_POS
 
         private string _address2
         {
-            get;
+            get { return _address2; }
             set
             {
                 _address2 = value.Trim();
@@ -29,7 +29,7 @@ namespace CPSC462_POS
 
         private string _city
         {
-            get;
+            get { return _city; }
             set
             {
                 if (value != "")
@@ -39,7 +39,7 @@ namespace CPSC462_POS
 
         private string _state
         {
-            get;
+            get { return _state; }
             set
             {
                 if (value != "")
@@ -49,7 +49,7 @@ namespace CPSC462_POS
 
         private int _zipcode
         {
-            get;
+            get { return _zipcode; }
             set
             {
                 if (Information.IsNumeric(value) && (value > 0) && (value <= 99999))
@@ -57,16 +57,13 @@ namespace CPSC462_POS
             }
         }
 
-        public string Address
+        public string getAddress()
         {
-            get
-            {
-                return _address1 + "\n" +
-                    (_address2 == "" ? "" : (_address2 + "\n")) +
-                    _city + ", " +
-                    _state + " " +
-                    _zipcode;
-            }
+            return _address1 + "\n" +
+                (_address2 == "" ? "" : (_address2 + "\n")) +
+                _city + ", " +
+                _state + " " +
+                _zipcode;
         }
 
         public Address(int stNo, string addr1, string addr2, string city, string state, int zip)
