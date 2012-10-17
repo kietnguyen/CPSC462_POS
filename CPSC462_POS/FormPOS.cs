@@ -80,7 +80,7 @@ namespace CPSC462_POS
             foreach (SalesLineItem lineItem in aSale.getItems())
             {
                 Item aItem = lineItem.getItem();
-                dgItemLine.Rows.Add(aItem.getID(), aItem.getDesc(), lineItem.getQty(),
+                dgItemLine.Rows.Add(aItem.getID(), aItem.getName(), lineItem.getQty(),
                                     aItem.getPrice().ToString("C"), lineItem.getPrice().ToString("C"));
             }
             tbSubtotal.Text = aSale.subTotal.ToString("C");

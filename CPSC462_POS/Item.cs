@@ -7,10 +7,9 @@ namespace CPSC462_POS
 {
     class Item
     {
-        protected int id;
-        protected String name = "";
-        protected String desc = "";
-        protected decimal price = 1m;
+        private int id;
+        private String name = "";
+        private decimal price = 1m;
 
         public Item(int product_id)
         {
@@ -19,13 +18,38 @@ namespace CPSC462_POS
             //DB connect and get attribute values
             DBConnect db = new DBConnect();
 
+            // hard code for different items
+            //lookup item info from DB
+            switch (product_id)
+            { 
+                case 1:
+                    this.name = "Socks";
+                    this.price = 11.8m;
+                    break;
+                case 2:
+                    this.name = "Gum";
+                    this.price = 3.5m;
+                    break;
+                case 3:
+                    this.name = "Mustard";
+                    this.price = 1.99m;
+                    break;
+                case 4:
+                    this.name = "Ice";
+                    this.price = 1.99m;
+                    break;
+                default:
+                    this.name = "Misc";
+                    this.price = 1m;
+                    break;
+            }
+
         }
 
-        public Item(int id, String name, string desc, decimal price)
+        public Item(int id, String name, decimal price)
         {
             this.id = id;
             this.name = name;
-            this.desc = desc;
             this.price = price;
         }
 
@@ -42,11 +66,6 @@ namespace CPSC462_POS
         public String getName()
         {
             return this.name;
-        }
-
-        public String getDesc()
-        {
-            return this.desc;
         }
 
         public int getID()
