@@ -12,7 +12,7 @@ namespace CPSC462_POS
         public Store store { get; set; }
 
         public Employee()
-        { 
+        {
         }
 
         public Employee(Store aStore, int eId, decimal salary)
@@ -25,6 +25,11 @@ namespace CPSC462_POS
         public int getEmployeeId()
         {
             return this.employeeId;
+        }
+
+        public override string showId()
+        {
+            return base.showId();
         }
 
         public virtual void login()

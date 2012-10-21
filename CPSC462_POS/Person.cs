@@ -35,5 +35,12 @@ namespace CPSC462_POS
         {
             return this.lastName;
         }
+
+        public virtual string showId()
+        {
+            return this.firstName + " " + this.lastName + "\n" +
+                    this.dob + "\n" +
+                    this.address;
+        }
     }
 }
