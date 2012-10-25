@@ -1,3 +1,0 @@
-sometext sometext
-something
-some new text
