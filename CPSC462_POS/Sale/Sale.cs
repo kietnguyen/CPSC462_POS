@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using Payments;
 
 namespace CPSC462_POS
 {
@@ -11,41 +12,11 @@ namespace CPSC462_POS
         const decimal DEFAULT_TAX_RATE = 0.08m;
         private DateTime date;
         private decimal taxRate = DEFAULT_TAX_RATE;
+        private PaymentMethod payment;
 
         // change ArrayList to List: http://stackoverflow.com/questions/2309694/arraylist-vs-list-in-c-sharp
         private List<SalesLineItem> item_list;
         private int registerId;
-
-        public decimal subTotal
-        {
-            get
-            {
-                decimal total = 0m;
-
-                foreach (SalesLineItem lineItem in item_list)
-                {
-                    total += lineItem.getPrice();
-                }
-
-                return total;
-            }
-        }
-
-        public decimal total
-        {
-            get
-            {
-                return this.subTotal * (1 + taxRate);
-            }
-        }
-
-        public decimal tax
-        {
-            get
-            {
-                return this.subTotal * this.taxRate;
-            }
-        }
 
         public Sale()
         {
@@ -66,18 +37,26 @@ namespace CPSC462_POS
             return this.date;
         }
 
-        public decimal getSubTotal(){
-            return this.subTotal;
+        public decimal getSubTotal()
+        {
+            decimal total = 0m;
+
+            foreach (SalesLineItem lineItem in item_list)
+            {
+                total += lineItem.getPrice();
+            }
+
+            return total;
         }
 
         public decimal getTax()
         {
-            return this.tax;
+            return getSubTotal() * taxRate;
         }
 
         public decimal getTotal()
         {
-            return this.total;
+            return getSubTotal() * (1 + taxRate);
         }
 
         public List<SalesLineItem> getItems()
@@ -89,7 +68,7 @@ namespace CPSC462_POS
         {
             foreach (SalesLineItem lineItem in item_list)
             {
-                if (lineItem.getItem().getID() == product_id)
+                if (lineItem.getItem().id == product_id)
                 {
                     return lineItem;
                 }
@@ -112,7 +91,7 @@ namespace CPSC462_POS
         public void add_item(SalesLineItem lineItem)
         {
             if (lineItem == null) return;
-            add_item(lineItem.getItem().getID(), lineItem.getQty());
+            add_item(lineItem.getItem().id, lineItem.getQty());
         }
 
         public void remove_item(int product_id, int qty)
@@ -127,18 +106,28 @@ namespace CPSC462_POS
         public void remove_item(SalesLineItem lineItem)
         {
             if (lineItem == null) return;
-            remove_item(lineItem.getItem().getID(), lineItem.getQty());
+            remove_item(lineItem.getItem().id, lineItem.getQty());
+        }
+
+        public void update_item(int product_id, int qty)
+        {
+            SalesLineItem foundLineItem = findLineItem(product_id);
+            if (foundLineItem == null) return;
+            if (qty == 0)
+                item_list.Remove(foundLineItem);
+            else
+                foundLineItem.setQty(qty);
         }
 
         public void update_item(SalesLineItem lineItem)
         {
             if (lineItem == null) return;
-            SalesLineItem foundLineItem = findLineItem(lineItem.getItem().getID());
-            if (foundLineItem == null) return;
-            if (lineItem.getQty() == 0)
-                item_list.Remove(foundLineItem);
-            else
-                foundLineItem.setQty(lineItem.getQty());
+            update_item(lineItem.getItem().id, lineItem.getQty());
+        }
+
+        public void createPayment()
+        {
+
         }
     }
 }

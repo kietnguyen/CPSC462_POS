@@ -10,13 +10,19 @@ namespace CPSC462_POS
     public class Store
     {
         private string name;
-        private string address;
+        private Address address;
+        private decimal taxRate;
         private List<Register> registers;
 
-        public Store(string name, string address)
+        public string Name { get { return this.name; } }
+        public string Address { get { return address.getAddress(); } }
+        public decimal TaxRate { get { return taxRate; } }
+
+        public Store(string name, string address, decimal taxRate)
         {
             this.name = name;
-            this.address = address;
+            this.address = new Address(address);
+            this.taxRate = taxRate;
             this.registers = new List<Register>();
         }
 
@@ -49,7 +55,7 @@ namespace CPSC462_POS
             }
             else
             {
-                Debug.WriteLine("Register {0} is not existed!", register.getId());
+                Debug.WriteLine("Register {0} is not existed!", register.Id);
                 return false;
             }
 
@@ -59,7 +65,7 @@ namespace CPSC462_POS
         {
             foreach (Register aRegister in registers)
             {
-                if (aRegister.getId() == registerId)
+                if (aRegister.Id == registerId)
                 {
                     // mask register "not_using"
                     registers.Remove(aRegister);

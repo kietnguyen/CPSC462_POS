@@ -5,11 +5,14 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class CreditCard : PaymentMethod
+    class Cashier : Employee
     {
-        public void process(int credit_card_no, int ccv, int month, int year)
-        {
+        private Register register;
 
+        public override void login()
+        {
+            base.login();
         }
+
     }
 }

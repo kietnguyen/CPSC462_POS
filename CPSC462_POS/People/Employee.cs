@@ -11,25 +11,24 @@ namespace CPSC462_POS
         private decimal salary;
         public Store store { get; set; }
 
-        public Employee()
+        public int EmployeeId
         {
+            get { return this.employeeId; }
         }
 
-        public Employee(Store aStore, int eId, decimal salary)
+        public Employee(Store aStore, int eId, decimal salary, string first, string last, string dob, string address)
+            : base(first, last, dob, address)
         {
             this.employeeId = eId;
             this.store = aStore;
             this.salary = salary;
         }
 
-        public int getEmployeeId()
-        {
-            return this.employeeId;
-        }
 
         public override string showId()
         {
-            return base.showId();
+            return employeeId + "\n"
+                    + base.showId();
         }
 
         public virtual void login()

@@ -5,11 +5,7 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class Cash : PaymentMethod
+    class ProductCatalog
     {
-        public void process()
-        {
-
-        }
     }
 }

@@ -100,11 +100,11 @@ namespace CPSC462_POS_Test
         {
             Sale target = new Sale();
             target.add_item(new SalesLineItem(1, 1));
-            Assert.AreEqual("$11.80", target.subTotal.ToString("C"));
+            Assert.AreEqual("$11.80", target.getSubTotal().ToString("C"));
 
             target.add_item(new SalesLineItem(2, 3));
             target.add_item(new SalesLineItem(3, 2));
-            Assert.AreEqual("$26.28", target.subTotal.ToString("C"));
+            Assert.AreEqual("$26.28", target.getSubTotal().ToString("C"));
         }
 
         [TestMethod()]
@@ -112,11 +112,11 @@ namespace CPSC462_POS_Test
         {
             Sale target = new Sale();
             target.add_item(new SalesLineItem(1, 1));
-            Assert.AreEqual("$0.94", target.tax.ToString("C"));
+            Assert.AreEqual("$0.94", target.getTax().ToString("C"));
 
             target.add_item(new SalesLineItem(2, 3));
             target.add_item(new SalesLineItem(3, 2));
-            Assert.AreEqual("$2.10", target.tax.ToString("C"));
+            Assert.AreEqual("$2.10", target.getTax().ToString("C"));
         }
 
         [TestMethod()]
@@ -124,11 +124,11 @@ namespace CPSC462_POS_Test
         {
             Sale target = new Sale();
             target.add_item(new SalesLineItem(1, 1));
-            Assert.AreEqual("$12.74", target.total.ToString("C"));
+            Assert.AreEqual("$12.74", target.getTotal().ToString("C"));
 
             target.add_item(new SalesLineItem(2, 3));
             target.add_item(new SalesLineItem(3, 2));
-            Assert.AreEqual("$28.38", target.total.ToString("C"));
+            Assert.AreEqual("$28.38", target.getTotal().ToString("C"));
         }
 
         //[TestMethod()]

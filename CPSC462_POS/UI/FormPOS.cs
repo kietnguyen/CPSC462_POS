@@ -11,19 +11,25 @@ namespace CPSC462_POS
 {
     public partial class FormPOS : Form
     {
+        private Register aRegister;
         private Sale aSale;
 
         public FormPOS()
         {
             InitializeComponent();
-            aSale = new Sale();
+            aRegister = new Register(0);
+            aRegister.createNewSale();
+            aSale = aRegister.Sale;
         }
 
         private void tbItemNo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return || e.KeyChar == (char)Keys.Enter)
             {
-                aSale.add_item(getSalesLineItemFromForm());
+                int itemId = textboxToPosInt(tbItemNo, "Item Id must be a positive integer.");
+                int quantity = textboxToPosInt(tbQuantity, "Quatity must be a positive integer.");
+
+                aSale.add_item(itemId, quantity);
                 updateLineItem();
             }
         }
@@ -32,46 +38,37 @@ namespace CPSC462_POS
         {
             if (e.KeyChar == (char)Keys.Return || e.KeyChar == (char)Keys.Enter)
             {
+                int itemId = textboxToPosInt(tbItemNo, "Item Id must be a positive integer.");
+                int quantity = textboxToPosInt(tbQuantity, "Quatity must be a positive integer.");
+
                 if (dgItemLine.SelectedCells.Count > 0)
-                    aSale.update_item(getSalesLineItemFromForm());
+                    aSale.update_item(itemId, quantity);
                 else
-                    aSale.add_item(getSalesLineItemFromForm());
+                    aSale.add_item(itemId, quantity);
+
                 updateLineItem();
             }
         }
 
-        private SalesLineItem getSalesLineItemFromForm()
+        private int textboxToPosInt(TextBox tb, string errMessage)
         {
-            int itemNo = 0;
-            int quantity = 0;
-
-            if (tbItemNo.Text == "") return null;
+            int num = 0;
 
             try
             {
-                quantity = Convert.ToInt32(tbQuantity.Text == "" ? "1" : tbQuantity.Text);
-                tbQuantity.Clear();
+                num = Convert.ToInt32(tb.Text);
+                tb.Clear();
             }
             catch (FormatException e)
             {
-                MessageBox.Show(e.Message);
-                return null;
+                if (errMessage.Length == 0)
+                    MessageBox.Show(e.Message);
+                else throw e;
             }
 
-            if (quantity < 0) return null;
+            if (num <= 0) throw new Exception(errMessage);
 
-            try
-            {
-                itemNo = Convert.ToInt32(tbItemNo.Text);
-                tbItemNo.Clear();
-            }
-            catch (FormatException e)
-            {
-                MessageBox.Show(e.Message);
-                return null;
-            }
-
-            return new SalesLineItem(itemNo, quantity);
+            return num;
         }
 
         private void updateLineItem()
@@ -79,13 +76,13 @@ namespace CPSC462_POS
             dgItemLine.Rows.Clear();
             foreach (SalesLineItem lineItem in aSale.getItems())
             {
-                Item aItem = lineItem.getItem();
-                dgItemLine.Rows.Add(aItem.getID(), aItem.getName(), lineItem.getQty(),
-                                    aItem.getPrice().ToString("C"), lineItem.getPrice().ToString("C"));
+                ProductSpecification aItem = lineItem.getItem();
+                dgItemLine.Rows.Add(aItem.id, aItem.name, lineItem.getQty(),
+                                    aItem.price.ToString("C"), lineItem.getPrice().ToString("C"));
             }
-            tbSubtotal.Text = aSale.subTotal.ToString("C");
-            tbTax.Text = aSale.tax.ToString("C");
-            tbTotal.Text = aSale.total.ToString("C");
+            tbSubtotal.Text = aSale.getSubTotal().ToString("C");
+            tbTax.Text = aSale.getTax().ToString("C");
+            tbTotal.Text = aSale.getTotal().ToString("C");
 
             dgItemLine.ClearSelection();
         }
@@ -100,29 +97,33 @@ namespace CPSC462_POS
 
         private void btnChangeQuantity_Click(object sender, EventArgs e)
         {
-            aSale.update_item(getSalesLineItemFromForm());
+            int itemId = textboxToPosInt(tbItemNo, "Item Id must be a positive integer.");
+            int quantity = textboxToPosInt(tbQuantity, "Quatity must be a positive integer.");
+
+            aSale.update_item(itemId, quantity);
             updateLineItem();
         }
 
 
         private void btnItemVoid_Click(object sender, EventArgs e)
         {
-            aSale.remove_item(getSalesLineItemFromForm());
+            int itemId = textboxToPosInt(tbItemNo, "Item Id must be a positive integer.");
+            int quantity = textboxToPosInt(tbQuantity, "Quatity must be a positive integer.");
+
+            aSale.remove_item(itemId, quantity);
             updateLineItem();
         }
 
         private void btnVoidSale_Click(object sender, EventArgs e)
         {
-            aSale = new Sale();
+            aRegister.voidSale();
             updateLineItem();
         }
 
         private void btnMakePayment_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Thank you for shopping.");
+            aRegister.makePayment();
         }
-
-
 
     }
 }

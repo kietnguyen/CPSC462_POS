@@ -8,22 +8,15 @@ namespace CPSC462_POS
     class SalesLineItem
     {
         private int qty;
-        private Item item;
-
-        public SalesLineItem()
-        {
-            this.qty = 0;
-            this.item = null;
-        }
+        private ProductSpecification item;
 
         public SalesLineItem(int product_id, int qty)
         {
             this.qty = qty;
-            this.item = new Item(product_id);
-            // database query
+            this.item = new ProductSpecification(product_id);
         }
 
-        public SalesLineItem(Item item, int qty)
+        public SalesLineItem(ProductSpecification item, int qty)
         {
             this.item = item;
             this.qty = qty;
@@ -49,16 +42,14 @@ namespace CPSC462_POS
             this.qty = qty;
         }
 
-        public Item getItem()
+        public ProductSpecification getItem()
         {
             return this.item;
         }
 
-        // decimal is better for financial and monetary calculations
-        // http://msdn.microsoft.com/en-us/library/364x0z75(v=vs.80).aspx
         public decimal getPrice()
         {
-            return (decimal)this.qty * this.item.getPrice();
+            return (decimal)this.qty * this.item.price;
         }
     }
 }

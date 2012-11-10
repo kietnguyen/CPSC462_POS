@@ -12,6 +12,7 @@ namespace CPSC462_POS
     {
         private MySqlConnection connection;
         private string server;
+        private string host;
         private string database;
         private string uid;
         private string password;
@@ -25,14 +26,21 @@ namespace CPSC462_POS
         //Initialize values
         private void Initialize()
         {
-            server = "home.thomasdkim.com";
-            database = "cpsc462";
-            uid = "class";
-            password = "test123";
+            server = Settings.DB.Default.db_server;
+            host = Settings.DB.Default.db_host;
+            database = Settings.DB.Default.db_name;
+            uid = Settings.DB.Default.db_uid;
+            password = Settings.DB.Default.db_password;
             string connectionString;
+            /*
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+                                database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            */
 
+            connectionString = "HOST=" + server + ";" + "DATABASE=" +
+                                database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+            MySqlConnection myConn = new MySqlConnection("host=server;protocol=SSH;user=root;password=root;database=test");
             connection = new MySqlConnection(connectionString);
         }
 

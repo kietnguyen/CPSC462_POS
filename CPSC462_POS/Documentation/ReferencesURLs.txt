@@ -1,0 +1,14 @@
+﻿Properties vs. Methods
+	http://stackoverflow.com/questions/1374273/c-sharp-when-to-use-properties-instead-of-functions
+	http://msdn.microsoft.com/en-us/library/bzwdh01d%28VS.71%29.aspx#cpconpropertyusageguidelinesanchor1
+
+Decimal is better for financial and monetary calculations
+	http://msdn.microsoft.com/en-us/library/364x0z75(v=vs.80).aspx
+
+Connect to mySQL using C#
+	http://www.codeproject.com/Articles/43438/Connect-C-to-MySQL
+	http://www.devart.com/dotconnect/mysql/docs/SecureConnections.html
+	http://devenkher.blogspot.com/2011/09/connecting-mysql-over-ssh-using-c.html
+
+To TitleCase
+	http://msdn.microsoft.com/en-us/library/system.globalization.textinfo.totitlecase.aspx

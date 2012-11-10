@@ -5,14 +5,16 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class Cashier : Employee
+    class TaxAgent : Person
     {
-        private Register workRegister;
-
-        public override void login()
+        public TaxAgent(int taxId)
         {
-            base.login();
+
         }
 
+        public void collectTax()
+        {
+            
+        }
     }
 }
