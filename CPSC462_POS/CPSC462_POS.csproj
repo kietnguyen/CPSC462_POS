@@ -78,6 +78,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\Accounting.cs" />
+    <Compile Include="Payments\AuthorizeService.cs" />
+    <Compile Include="Payments\Cash.cs" />
+    <Compile Include="Payments\CreditCard.cs" />
+    <Compile Include="Payments\PaymentMethod.cs" />
     <Compile Include="People\Address.cs" />
     <Compile Include="People\Cashier.cs" />
     <Compile Include="People\Customer.cs" />
@@ -95,7 +99,7 @@
     <Compile Include="Accounting\Ledger.cs" />
     <Compile Include="People\Manager.cs" />
     <Compile Include="Inventory\ProductCatalog.cs" />
-    <Compile Include="Inventory\Item.cs" />
+    <Compile Include="Inventory\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale\Register.cs" />
@@ -109,8 +113,12 @@
     <Compile Include="Inventory\SalesPerson.cs" />
     <Compile Include="Sale\Store.cs" />
     <Compile Include="Accounting\TaxAgent.cs" />
+    <Compile Include="UI\IController.cs" />
+    <Compile Include="UI\IModel.cs" />
+    <Compile Include="UI\IView.cs" />
     <EmbeddedResource Include="UI\FormPOS.resx">
       <DependentUpon>FormPOS.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -123,6 +131,8 @@
     </Compile>
     <None Include="app.config" />
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\Sale.datasource" />
+    <None Include="Properties\DataSources\SalesLineItem.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -166,15 +176,7 @@
     <Content Include="Documentation\README.txt" />
     <Content Include="Documentation\ReferencesURLs.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Payments\Payments.csproj">
-      <Project>{2EB0C62D-EE81-4BF5-BCE6-923542BB824F}</Project>
-      <Name>Payments</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using Payments;
 
 namespace CPSC462_POS
 {
-    class Sale
+    public class Sale
     {
         const decimal DEFAULT_TAX_RATE = 0.08m;
-        private DateTime date;
+        private DateTime saleDate;
         private decimal taxRate = DEFAULT_TAX_RATE;
         private PaymentMethod payment;
 
@@ -18,24 +17,31 @@ namespace CPSC462_POS
         private List<SalesLineItem> item_list;
         private int registerId;
 
+        public DateTime SaleDate
+        {
+            get { return this.saleDate; }
+        }
+
+        public List<SalesLineItem> ItemList
+        {
+            get { return this.item_list; }
+        }
+
         public Sale()
         {
-            this.date = DateTime.Now;
+            this.saleDate = DateTime.Now;
             this.taxRate = DEFAULT_TAX_RATE;
             this.item_list = new List<SalesLineItem>();
         }
 
         public Sale(decimal taxRate)
         {
-            this.date = DateTime.Now;
+            this.saleDate = DateTime.Now;
             this.taxRate = taxRate;
             this.item_list = new List<SalesLineItem>();
         }
 
-        public DateTime getSaleDate()
-        {
-            return this.date;
-        }
+
 
         public decimal getSubTotal()
         {
@@ -59,10 +65,6 @@ namespace CPSC462_POS
             return getSubTotal() * (1 + taxRate);
         }
 
-        public List<SalesLineItem> getItems()
-        {
-            return this.item_list;
-        }
 
         private SalesLineItem findLineItem(int product_id)
         {
@@ -88,12 +90,6 @@ namespace CPSC462_POS
                 foundLineItem.addQty(qty);
         }
 
-        public void add_item(SalesLineItem lineItem)
-        {
-            if (lineItem == null) return;
-            add_item(lineItem.getItem().id, lineItem.getQty());
-        }
-
         public void remove_item(int product_id, int qty)
         {
             SalesLineItem foundLineItem = findLineItem(product_id);
@@ -101,12 +97,6 @@ namespace CPSC462_POS
             foundLineItem.removeQty(qty);
             if (foundLineItem.getQty() <= 0) item_list.Remove(foundLineItem);
 
-        }
-
-        public void remove_item(SalesLineItem lineItem)
-        {
-            if (lineItem == null) return;
-            remove_item(lineItem.getItem().id, lineItem.getQty());
         }
 
         public void update_item(int product_id, int qty)
@@ -117,12 +107,6 @@ namespace CPSC462_POS
                 item_list.Remove(foundLineItem);
             else
                 foundLineItem.setQty(qty);
-        }
-
-        public void update_item(SalesLineItem lineItem)
-        {
-            if (lineItem == null) return;
-            update_item(lineItem.getItem().id, lineItem.getQty());
         }
 
         public void createPayment()

@@ -36,12 +36,12 @@ namespace CPSC462_POS
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
                                 database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
             */
-
+            /*
             connectionString = "HOST=" + server + ";" + "DATABASE=" +
                                 database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
             MySqlConnection myConn = new MySqlConnection("host=server;protocol=SSH;user=root;password=root;database=test");
-            connection = new MySqlConnection(connectionString);
+            connection = new MySqlConnection(connectionString);*/
         }
 
         //open connection to database

@@ -11,7 +11,7 @@ namespace CPSC462_POS
     {
         private string name;
         private Address address;
-        private decimal taxRate;
+        private decimal taxRate = 0.08m;
         private List<Register> registers;
 
         public string Name { get { return this.name; } }
