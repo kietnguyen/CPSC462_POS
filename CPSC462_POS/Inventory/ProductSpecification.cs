@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class ProductSpecification
+    public class ProductSpecification
     {
         private int _id;
         private string _name = "";
@@ -16,10 +16,6 @@ namespace CPSC462_POS
         public string name { get { return _name; } }
         public string desc { get { return _desc; } }
         public decimal price { get { return _price; } }
-
-        public ProductSpecification()
-        {
-        }
 
         public ProductSpecification(int product_id)
         {

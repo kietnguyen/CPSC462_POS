@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Payments
+namespace CPSC462_POS
 {
     class AuthorizeService
     {
+        void bool  
     }
 }

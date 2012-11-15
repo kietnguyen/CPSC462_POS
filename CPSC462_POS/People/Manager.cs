@@ -7,11 +7,16 @@ namespace CPSC462_POS
 {
     class Manager : Employee
     {
-        private List<Register> registers;
+        private List<Employee> employees;
+
+        public Manager(Store aStore, int eId, decimal salary, string first, string last, string dob, string address)
+            : base(aStore, eId, salary, first, last, dob, address)
+        {
+            employees = new List<Employee>();
+        }
 
         public override void login()
         {
-            this.registers = base.store.getRegisters();
             base.login();
         }
 

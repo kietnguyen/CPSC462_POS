@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -78,12 +78,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\Accounting.cs" />
+    <Compile Include="Payments\AuthorizeService.cs" />
+    <Compile Include="Payments\Cash.cs" />
+    <Compile Include="Payments\CreditCard.cs" />
+    <Compile Include="Payments\PaymentMethod.cs" />
     <Compile Include="People\Address.cs" />
     <Compile Include="People\Cashier.cs" />
     <Compile Include="People\Customer.cs" />
     <Compile Include="Inventory\DBConnect.cs" />
     <Compile Include="People\Employee.cs" />
     <Compile Include="People\Person.cs" />
+    <Compile Include="UI\FormPaymentMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormPaymentMethod.Designer.cs">
+      <DependentUpon>FormPaymentMethod.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FormPOS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,7 +105,7 @@
     <Compile Include="Accounting\Ledger.cs" />
     <Compile Include="People\Manager.cs" />
     <Compile Include="Inventory\ProductCatalog.cs" />
-    <Compile Include="Inventory\Item.cs" />
+    <Compile Include="Inventory\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale\Register.cs" />
@@ -109,8 +119,12 @@
     <Compile Include="Inventory\SalesPerson.cs" />
     <Compile Include="Sale\Store.cs" />
     <Compile Include="Accounting\TaxAgent.cs" />
+    <EmbeddedResource Include="UI\FormPaymentMethod.resx">
+      <DependentUpon>FormPaymentMethod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\FormPOS.resx">
       <DependentUpon>FormPOS.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -153,9 +167,19 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.10.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2008 Express</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
       <Visible>False</Visible>
       <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
@@ -165,12 +189,13 @@
   <ItemGroup>
     <Content Include="Documentation\README.txt" />
     <Content Include="Documentation\ReferencesURLs.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Payments\Payments.csproj">
-      <Project>{2EB0C62D-EE81-4BF5-BCE6-923542BB824F}</Project>
-      <Name>Payments</Name>
-    </ProjectReference>
+    <Content Include="Products.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Products_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Products.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />

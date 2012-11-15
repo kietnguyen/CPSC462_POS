@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    public class Register
+    public class Register 
     {
         private int id;
         private Sale aSale;
@@ -22,6 +22,20 @@ namespace CPSC462_POS
             this.id = registerId;
         }
 
+        public Sale Sale
+        {
+            get { return aSale; }
+        }
+
+        public void addItem(int itemId, int quantity)
+        {
+            aSale.add_item(itemId, quantity);
+        }
+
+        public void updateItem(int itemId, int quantity)
+        {
+            aSale.update_item(itemId, quantity);
+        }
 
         public void voidItem()
         {
@@ -29,14 +43,14 @@ namespace CPSC462_POS
         }
 
         public void voidSale()
-        { 
+        {
             // report to database
             createNewSale();
         }
 
         public void createNewSale()
         {
-           aSale = new Sale(store.TaxRate);
+            aSale = new Sale();
         }
 
 

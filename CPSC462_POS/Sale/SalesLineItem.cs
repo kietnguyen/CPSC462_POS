@@ -5,10 +5,25 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class SalesLineItem
+    public class SalesLineItem
     {
         private int qty;
         private ProductSpecification item;
+
+        public int Quantity
+        { get { return qty; } }
+
+        public int ProductId
+        { get { return item.id; } }
+
+        public string ProductName
+        { get { return item.name; } }
+
+        public decimal ProductPrice
+        { get { return item.price; } }
+
+        public decimal Subtotal
+        { get { return qty * item.price; } }
 
         public SalesLineItem(int product_id, int qty)
         {

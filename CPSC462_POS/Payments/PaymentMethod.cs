@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Payments
+namespace CPSC462_POS
 {
     public abstract class PaymentMethod
     {
-        private decimal _amount = 0;
+        private decimal amount = 0;
 
-        public decimal amount
+        public decimal Amount
         {
-            get { return _amount; }
+            get { return amount; }
+            set { amount = value; }
         }
 
         public abstract void process();
