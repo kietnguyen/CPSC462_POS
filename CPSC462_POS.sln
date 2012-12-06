@@ -3,10 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPSC462_POS", "CPSC462_POS\CPSC462_POS.csproj", "{3DCD850C-29B0-440A-8DD2-1DA15FB076A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPSC462_POS_Test", "CPSC462_POS_Test\CPSC462_POS_Test.csproj", "{519EBC5D-5692-403C-82F2-8E7153F12713}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS_Test", "CPSC462_POS_Test\POS_Test.csproj", "{519EBC5D-5692-403C-82F2-8E7153F12713}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12C8D61C-8856-4106-BC1D-FA151DD1CD70}"
 	ProjectSection(SolutionItems) = preProject
+		CPSC462_POS.vsd = CPSC462_POS.vsd
 		CPSC462_POS.vsmdi = CPSC462_POS.vsmdi
 		Local.testsettings = Local.testsettings
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings

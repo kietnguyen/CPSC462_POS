@@ -7,16 +7,15 @@ namespace CPSC462_POS
 {
     public class ProductSpecification
     {
-        private int _id;
-        private string _name = "";
-        private string _desc = "";
-        private decimal _price = 1m;
+        private string name = "";
+        private string manufacture = "";
+        private string desc = "";
 
-        public int id { get { return _id; } }
-        public string name { get { return _name; } }
-        public string desc { get { return _desc; } }
-        public decimal price { get { return _price; } }
+        public string Name { get { return name; } }
+        public string Manufacture { get { return manufacture; } }
+        public string Description { get { return desc; } }
 
+<<<<<<< HEAD
         public ProductSpecification(int product_id)
         {
             this._id = product_id;
@@ -58,6 +57,13 @@ namespace CPSC462_POS
             this._name = name;
             this._desc = desc;
             this._price = price;
+=======
+        public ProductSpecification(string name, string manufacture, string desc)
+        {
+            this.name = name;
+            this.manufacture = manufacture;
+            this.desc = desc;
+>>>>>>> origin/newbranch
         }
 
     }

@@ -7,8 +7,23 @@ namespace CPSC462_POS
 {
     public class SalesLineItem
     {
-        private int qty;
-        private ProductSpecification item;
+        private int quantity;
+        private Item item;
+
+        public int Quantity
+        { get { return quantity; } }
+
+        public int ProductId
+        { get { return item.ItemId; } }
+
+        public string ProductName
+        { get { return item.Name; } }
+
+        public decimal ProductPrice
+        { get { return item.Price; } }
+
+        public decimal Subtotal
+        { get { return quantity * item.Price; } }
 
         public int Quantity
         { get { return qty; } }
@@ -27,44 +42,44 @@ namespace CPSC462_POS
 
         public SalesLineItem(int product_id, int qty)
         {
-            this.qty = qty;
-            this.item = new ProductSpecification(product_id);
+            this.quantity = qty;
+            this.item = DBConnect.GetInstance.retrieveItem(product_id);
         }
 
-        public SalesLineItem(ProductSpecification item, int qty)
+        public SalesLineItem(Item item, int qty)
         {
             this.item = item;
-            this.qty = qty;
+            this.quantity = qty;
         }
 
         public void addQty(int qty)
         {
-            this.qty += qty;
+            this.quantity += qty;
         }
 
         public void removeQty(int qty)
         {
-            this.qty -= qty;
+            this.quantity -= qty;
         }
 
         public int getQty()
         {
-            return this.qty;
+            return this.quantity;
         }
 
         public void setQty(int qty)
         {
-            this.qty = qty;
+            this.quantity = qty;
         }
 
-        public ProductSpecification getItem()
+        public Item getItem()
         {
             return this.item;
         }
 
         public decimal getPrice()
         {
-            return (decimal)this.qty * this.item.price;
+            return (decimal)this.quantity * this.item.Price;
         }
     }
 }

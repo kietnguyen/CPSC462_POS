@@ -10,15 +10,26 @@ namespace CPSC462_POS
     //Reference: http://www.codeproject.com/Articles/43438/Connect-C-to-MySQL
     class DBConnect
     {
+        private static DBConnect dbConnect = null;
+        
         private MySqlConnection connection;
         private string server;
-        private string host;
         private string database;
         private string uid;
         private string password;
 
+        public static DBConnect GetInstance
+        {
+            get
+            {
+                if (dbConnect == null)
+                    dbConnect = new DBConnect();
+                return dbConnect;
+            }
+        }
+
         //Constructor
-        public DBConnect()
+        private DBConnect()
         {
             Initialize();
         }
@@ -27,14 +38,12 @@ namespace CPSC462_POS
         private void Initialize()
         {
             server = Settings.DB.Default.db_server;
-            host = Settings.DB.Default.db_host;
             database = Settings.DB.Default.db_name;
             uid = Settings.DB.Default.db_uid;
             password = Settings.DB.Default.db_password;
-            string connectionString;
-            /*
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+            string connectionString = "SERVER=" + server + ";" + "DATABASE=" +
                                 database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+<<<<<<< HEAD
             */
             /*
             connectionString = "HOST=" + server + ";" + "DATABASE=" +
@@ -42,6 +51,10 @@ namespace CPSC462_POS
 
             MySqlConnection myConn = new MySqlConnection("host=server;protocol=SSH;user=root;password=root;database=test");
             connection = new MySqlConnection(connectionString);*/
+=======
+      
+            connection = new MySqlConnection(connectionString);
+>>>>>>> origin/newbranch
         }
 
         //open connection to database
@@ -62,11 +75,11 @@ namespace CPSC462_POS
                 switch (ex.Number)
                 {
                     case 0:
-                        //MessageBox.Show("Cannot connect to server.  Contact administrator");
+                        MessageBox.Show("Cannot connect to server.  Contact administrator");
                         break;
 
                     case 1045:
-                        //MessageBox.Show("Invalid username/password, please try again");
+                        MessageBox.Show("Invalid username/password, please try again");
                         break;
                 }
                 return false;
@@ -136,6 +149,56 @@ namespace CPSC462_POS
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
+        public Item retrieveItem(int itemId)
+        {
+            string query = @"SELECT p.name, p.manufacture, p.description, i.price
+                            FROM item AS i
+                            LEFT JOIN prodspec AS p 
+                            ON i.specid = p.id
+                            WHERE i.itemId = " + itemId;
+
+            //Create a list to store the result
+            //List<string>[] list = new List<string>[4];
+            List<string> list = new List<string>();
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    list.Add(dataReader["name"] + "");
+                    list.Add(dataReader["manufacture"] + "");
+                    list.Add(dataReader["description"] + "");
+                    list.Add(dataReader["price"] + "");
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+            }
+
+            //if (list == 0 || list.Length > 1) return null;
+
+            ProductSpecification spec = new ProductSpecification(list[0], list[1], list[2]);
+            Item item = new Item(itemId, spec, Convert.ToDecimal(list[3]));
+
+            return item;
+        }
+
+
         //Select statement
         public List<string>[] Select(string query)
         {
@@ -153,7 +216,7 @@ namespace CPSC462_POS
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-      
+                    
                 }
 
                 //close Data Reader

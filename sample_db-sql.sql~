@@ -1,0 +1,82 @@
+CREATE DATABASE cpsc462_pos;
+
+CREATE TABLE cpsc462_pos.prodspec (
+	id serial,
+	name varchar(255) NOT NULL,
+	description varchar(255) DEFAULT '',
+	price decimal NOT NULL
+);
+
+CREATE TABLE cpsc462_pos.item (
+	id serial,
+	itemid bigint unsigned NOT NULL,
+	spec
+)
+
+CREATE TABLE sample_db.SubSampleType (
+	SubSampleTypeId serial,
+	PrimeSampleTypeId bigint unsigned,
+	SubSampleTypeName varchar(255) DEFAULT '',
+	
+	PRIMARY KEY (SubSampleTypeId),
+	FOREIGN KEY (PrimeSampleTypeId)
+		REFERENCES SampleType(SampleTypeId)
+		ON DELETE CASCADE
+);
+
+CREATE TABLE sample_db.AddtlAttrType (
+	AddtlAttrId serial,
+	AddtlAttrName varchar(255) DEFAULT '',
+	AttrCount int unsigned DEFAULT 0
+);
+
+CREATE TABLE sample_db.Images (
+    image_id serial,
+    filename varchar(255) NOT NULL,
+    mime_type varchar(255) NOT NULL,
+    file_size int NOT NULL,
+    file_data longblob NOT NULL,
+ 
+    PRIMARY KEY (image_id),
+    INDEX (filename)
+);
+
+CREATE TABLE sample_db.ReadingTable (
+	ReadingId serial,
+	SampleTypeId bigint unsigned,
+	SubSampleTypeId bigint unsigned,
+	
+	Temperature double,
+	-- default unit: F
+	
+	TimeVal datetime,
+	-- default format: yyyy-mm-dd hh:nn:ss
+	
+	LocationX double,
+	LocationY double,
+	Color varchar(255),
+	Weight double CHECK (Weight > 0),
+	-- default format: lb; 1 lb = 16 oz
+	
+	LengthVal double check (LengthVal > 0), 
+	-- default format: ft; 1 ft = 12 in
+	-- head and body length
+	
+	Odor varchar(255),
+	ImageId bigint,
+	Note varchar(255),
+	OtherAttr varchar(255),
+	
+	PRIMARY KEY (ReadingId),
+	FOREIGN KEY (SampleTypeId)
+		REFERENCES SampleType(SampleTypeId)
+		ON DELETE CASCADE,
+		
+	FOREIGN KEY (SubSampleTypeId)
+		REFERENCES SubSampleType(SubSampleId)
+		ON DELETE CASCADE,
+		
+	FOREIGN KEY (ImageId)
+		REFERENCES Images(image_id)
+		ON DELETE CASCADE
+);

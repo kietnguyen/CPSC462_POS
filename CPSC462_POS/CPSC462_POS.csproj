@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -81,6 +81,9 @@
     <Compile Include="Payments\AuthorizeService.cs" />
     <Compile Include="Payments\Cash.cs" />
     <Compile Include="Payments\CreditCard.cs" />
+    <Compile Include="Payments\CashPayment.cs" />
+    <Compile Include="Payments\CheckPayment.cs" />
+    <Compile Include="Payments\CreditCardPayment.cs" />
     <Compile Include="Payments\PaymentMethod.cs" />
     <Compile Include="People\Address.cs" />
     <Compile Include="People\Cashier.cs" />
@@ -88,6 +91,13 @@
     <Compile Include="Inventory\DBConnect.cs" />
     <Compile Include="People\Employee.cs" />
     <Compile Include="People\Person.cs" />
+    <Compile Include="UI\TextBoxParser.cs" />
+    <Compile Include="UI\FormPaymentMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormPaymentMethod.Designer.cs">
+      <DependentUpon>FormPaymentMethod.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FormPOS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +126,10 @@
     <Compile Include="UI\IController.cs" />
     <Compile Include="UI\IModel.cs" />
     <Compile Include="UI\IView.cs" />
+    <Compile Include="UI\IFormPOSView.cs" />
+    <EmbeddedResource Include="UI\FormPaymentMethod.resx">
+      <DependentUpon>FormPaymentMethod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\FormPOS.resx">
       <DependentUpon>FormPOS.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -163,9 +177,19 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.10.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2008 Express</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
       <Visible>False</Visible>
       <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
@@ -177,6 +201,17 @@
     <Content Include="Documentation\ReferencesURLs.txt" />
   </ItemGroup>
   <ItemGroup />
+    <Content Include="Products.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Products_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Products.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

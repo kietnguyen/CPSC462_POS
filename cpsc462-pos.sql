@@ -1,0 +1,34 @@
+CREATE DATABASE cpsc462_pos;
+
+CREATE TABLE cpsc462_pos.prodspec (
+	id serial,
+	name varchar(255) NOT NULL,
+	manufacture varchar(255) DEFAULT '',
+	description varchar(255) DEFAULT ''
+);
+
+CREATE TABLE cpsc462_pos.item (
+	id serial,
+	itemid bigint unsigned NOT NULL,
+	specid bigint unsigned NOT NULL,
+	price decimal(10,2) NOT NULL,
+	
+	FOREIGN KEY (specid)
+		REFERENCES prodspec(id)
+);
+
+INSERT INTO cpsc462_pos.prodspec
+		(name, manufacture)
+VALUES	('Socks', 'Hanes'),
+				('Gum', 'Stride'),
+				('Mustard', 'French'),
+				('Ice', 'Crystal'),
+				('Misc', '');
+				
+INSERT INTO cpsc462_pos.item
+		(itemid, specid, price)
+VALUES (1, 1, 11.8),
+				(2, 2, 3.5),
+				(3, 3, 1.99),
+				(4, 4, 1.99),
+				(5, 5, 1);

@@ -7,13 +7,13 @@ namespace CPSC462_POS
 {
     public abstract class PaymentMethod
     {
-        private decimal _amount = 0;
+        protected decimal amount = 0;
 
-        public decimal amount
+        public decimal Amount
         {
-            get { return _amount; }
+            get { return amount; }
         }
 
-        public abstract void process();
+        public abstract bool process();
     }
 }
