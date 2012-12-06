@@ -5,16 +5,15 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class AuthorizeService
+    class CashPayment : PaymentMethod
     {
-        private string name;
 
-        public AuthorizeService(string name)
+        public CashPayment(decimal amount)
         {
-            this.name = name;
+            base.amount = amount;
         }
-
-        public bool authorize()
+        
+        public override bool process()
         {
             return true;
         }

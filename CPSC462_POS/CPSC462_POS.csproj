@@ -79,8 +79,9 @@
   <ItemGroup>
     <Compile Include="Accounting\Accounting.cs" />
     <Compile Include="Payments\AuthorizeService.cs" />
-    <Compile Include="Payments\Cash.cs" />
-    <Compile Include="Payments\CreditCard.cs" />
+    <Compile Include="Payments\CashPayment.cs" />
+    <Compile Include="Payments\CheckPayment.cs" />
+    <Compile Include="Payments\CreditCardPayment.cs" />
     <Compile Include="Payments\PaymentMethod.cs" />
     <Compile Include="People\Address.cs" />
     <Compile Include="People\Cashier.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Inventory\DBConnect.cs" />
     <Compile Include="People\Employee.cs" />
     <Compile Include="People\Person.cs" />
+    <Compile Include="UI\TextBoxParser.cs" />
     <Compile Include="UI\FormPaymentMethod.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,7 +107,7 @@
     <Compile Include="Accounting\Ledger.cs" />
     <Compile Include="People\Manager.cs" />
     <Compile Include="Inventory\ProductCatalog.cs" />
-    <Compile Include="Inventory\Product.cs" />
+    <Compile Include="Inventory\Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale\Register.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="Inventory\SalesPerson.cs" />
     <Compile Include="Sale\Store.cs" />
     <Compile Include="Accounting\TaxAgent.cs" />
+    <Compile Include="UI\IFormPOSView.cs" />
     <EmbeddedResource Include="UI\FormPaymentMethod.resx">
       <DependentUpon>FormPaymentMethod.cs</DependentUpon>
     </EmbeddedResource>

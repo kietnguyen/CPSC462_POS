@@ -4,9 +4,16 @@ using System.Linq;
 using System.Text;
 using Microsoft.VisualBasic;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace CPSC462_POS
 {
+    /** \class Address
+     *  \brief Address includes address 1, address 2, city, state, and zip code.
+     *  
+     *  \deta
+     * 
+     */
     class Address
     {
         private string address1;
@@ -20,13 +27,16 @@ namespace CPSC462_POS
             get { return address1; }
             set
             {
-                if (value.Trim() == "")
-                    throw new Exception("Address should not be empty");
+                if (String.IsNullOrEmpty(value.Trim()))
+                    MessageBox.Show("Address should not be empty");
 
                 address1 = value.Trim();
             }
         }
 
+        /*
+         * 
+         */
         private string Address2
         {
             get { return address2; }
@@ -41,8 +51,8 @@ namespace CPSC462_POS
             get { return city; }
             set
             {
-                if (value.Trim() == "")
-                    throw new Exception("City should not be empty.");
+                if (String.IsNullOrEmpty(value.Trim()))
+                    MessageBox.Show("City should not be empty.");
 
                 // Reference: http://msdn.microsoft.com/en-us/library/system.globalization.textinfo.totitlecase.aspx
                 TextInfo ti = new CultureInfo("en-US", false).TextInfo;
@@ -55,8 +65,8 @@ namespace CPSC462_POS
             get { return state; }
             set
             {
-                if (value.Trim() == "")
-                    throw new Exception("State should not be empty.");
+                if (String.IsNullOrEmpty(value.Trim()))
+                    MessageBox.Show("State should not be empty.");
 
                 state = value.Trim().ToUpper();
             }
@@ -67,12 +77,16 @@ namespace CPSC462_POS
             get { return zipcode; }
             set
             {
-                if (Information.IsNumeric(value) && (value > 0) && (value <= 99999))
-                    zipcode = value;
+                if (!Information.IsNumeric(value) || (value <= 0) || (value > 99999))
+                {
+                    MessageBox.Show("Invalid zip code.");
+                }
+                    
+                zipcode = value;
             }
         }
 
-        public Address(int stNo, string addr1, string addr2, string city, string state, int zip)
+        public Address(string addr1, string addr2, string city, string state, int zip)
         {
             this.Address1 = addr1;
             this.Address2 = addr2;
@@ -86,22 +100,31 @@ namespace CPSC462_POS
             string[] splitAddress = address.Split(',');
             int addressLength = splitAddress.Length;
 
-            if (addressLength != 3 && addressLength != 4) return;
+            if (addressLength != 3 && addressLength != 4)
+            {
+                MessageBox.Show("Incorrect address format.");
+            }
 
             this.Address1 = splitAddress[0];
-            if (addressLength == 3)
+            string[] splitStateZip;
+            switch (addressLength)
             {
-                this.City = splitAddress[1];
-                this.State = splitAddress[2].Split()[0];
-                this.Zipcode = Convert.ToInt32(splitAddress[2].Split()[1]);
+                case 3:
+                    this.City = splitAddress[1];
+                    splitStateZip = splitAddress[2].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    this.State = splitStateZip[0];
+                    this.Zipcode = Convert.ToInt32(splitStateZip[1]);
+                    break;
+
+                case 4:
+                    this.Address2 = splitAddress[1];
+                    this.City = splitAddress[2];
+                    splitStateZip = splitAddress[3].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    this.State = splitStateZip[0];
+                    this.Zipcode = Convert.ToInt32(splitStateZip[1]);
+                    break;
             }
-            else if (addressLength == 4)
-            {
-                this.Address2 = splitAddress[1];
-                this.City = splitAddress[2];
-                this.State = splitAddress[3].Split()[0];
-                this.Zipcode = Convert.ToInt32(splitAddress[3].Split()[1]);
-            }
+
         }
 
         public string getAddress()

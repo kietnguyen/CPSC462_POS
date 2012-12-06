@@ -5,10 +5,10 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    public class Register 
+    public class Register
     {
         private int id;
-        private Sale aSale;
+        private Sale sale;
         private Store store;
         private Cashier cashier;
 
@@ -17,29 +17,42 @@ namespace CPSC462_POS
             get { return id; }
         }
 
+        public Sale Sale
+        {
+            get { return sale; }
+        }
+
+        public Register(int registerId, Store store)
+        {
+            this.id = registerId;
+            this.store = store;
+            createNewSale();
+        }
+
         public Register(int registerId)
         {
             this.id = registerId;
+            createNewSale();
         }
 
-        public Sale Sale
+        public decimal getTaxRate()
         {
-            get { return aSale; }
+            return store.TaxRate;
         }
 
         public void addItem(int itemId, int quantity)
         {
-            aSale.add_item(itemId, quantity);
+            sale.addItem(itemId, quantity);
         }
 
         public void updateItem(int itemId, int quantity)
         {
-            aSale.update_item(itemId, quantity);
+            sale.updateItem(itemId, quantity);
         }
 
-        public void voidItem()
+        public void voidItem(int itemId)
         {
-
+            sale.updateItem(itemId, 0);
         }
 
         public void voidSale()
@@ -50,13 +63,13 @@ namespace CPSC462_POS
 
         public void createNewSale()
         {
-            aSale = new Sale();
+            sale = new Sale(store.TaxRate);
         }
 
 
         public void makePayment()
         {
-            aSale.createPayment();
+            sale.createPayment();
         }
 
         public void printReceipt()

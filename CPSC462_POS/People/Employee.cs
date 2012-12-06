@@ -24,7 +24,6 @@ namespace CPSC462_POS
             this.salary = salary;
         }
 
-
         public override string showId()
         {
             return employeeId + "\n"

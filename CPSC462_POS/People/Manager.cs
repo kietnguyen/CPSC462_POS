@@ -15,11 +15,6 @@ namespace CPSC462_POS
             employees = new List<Employee>();
         }
 
-        public override void login()
-        {
-            base.login();
-        }
-
         public void modifySale()
         {
 

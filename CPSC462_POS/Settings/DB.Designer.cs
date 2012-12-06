@@ -25,7 +25,7 @@ namespace CPSC462_POS.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ecs.fullerton.edu")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.67.31.89")]
         public string db_server {
             get {
                 return ((string)(this["db_server"]));
@@ -34,7 +34,7 @@ namespace CPSC462_POS.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cs462f1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("cpsc462_pos")]
         public string db_name {
             get {
                 return ((string)(this["db_name"]));
@@ -43,7 +43,7 @@ namespace CPSC462_POS.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cs462f1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("cpsc462_pos")]
         public string db_uid {
             get {
                 return ((string)(this["db_uid"]));
@@ -52,22 +52,10 @@ namespace CPSC462_POS.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("rahngeer")]
+        [global::System.Configuration.DefaultSettingValueAttribute("aaaa")]
         public string db_password {
             get {
                 return ((string)(this["db_password"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ecsmysql")]
-        public string db_host {
-            get {
-                return ((string)(this["db_host"]));
-            }
-            set {
-                this["db_host"] = value;
             }
         }
     }

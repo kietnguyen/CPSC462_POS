@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CPSC462_POS
 {
-    class CreditCard : PaymentMethod
+    class CreditCardPayment : PaymentMethod
     {
         private string name;
         private int month;
@@ -18,19 +18,14 @@ namespace CPSC462_POS
             set { name = value.Trim().ToUpper(); }
         }
         
-        public CreditCard()
+        public CreditCardPayment(decimal amount)
         {
-            base.Amount = 0m;
-        }
-        
-        public CreditCard(decimal amount)
-        {
-            base.Amount = amount;
+            base.amount = amount;
         }
 
-        public override void process()
+        public override bool process()
         {
-
+            return new AuthorizeService("Credit Card Authorize Service").authorize();
         }
 
         public void process(int credit_card_no, int ccv, int month, int year)
