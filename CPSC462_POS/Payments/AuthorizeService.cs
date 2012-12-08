@@ -7,5 +7,16 @@ namespace CPSC462_POS
 {
     class AuthorizeService
     {
+        private string name;
+
+        public AuthorizeService(string name)
+        {
+            this.name = name;
+        }
+
+        public bool authorize()
+        {
+            return true;
+        }
     }
 }

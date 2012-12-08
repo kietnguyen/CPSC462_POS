@@ -14,7 +14,7 @@ namespace CPSC462_POS
      *  \deta
      * 
      */
-    class Address
+    public class Address
     {
         private string address1;
         private string address2;

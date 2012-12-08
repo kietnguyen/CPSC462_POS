@@ -3,63 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-<<<<<<< HEAD
-=======
 using CPSC462_POS.UI;
 using System.Windows.Forms;
->>>>>>> origin/newbranch
 
 namespace CPSC462_POS
 {
     public class Sale
     {
-<<<<<<< HEAD
-        const decimal DEFAULT_TAX_RATE = 0.08m;
-        private DateTime saleDate;
-        private decimal taxRate = DEFAULT_TAX_RATE;
-        private PaymentMethod payment;
-=======
         private DateTime saleDate;
         private decimal taxRate;
         private List<PaymentMethod> payments;
         private Register register;
->>>>>>> origin/newbranch
 
         // change ArrayList to List: http://stackoverflow.com/questions/2309694/arraylist-vs-list-in-c-sharp
         private List<SalesLineItem> itemList;
 
         public DateTime SaleDate
-<<<<<<< HEAD
         {
             get { return this.saleDate; }
         }
 
         public List<SalesLineItem> ItemList
         {
-            get { return this.item_list; }
-        }
-
-        public Sale()
-        {
-            this.saleDate = DateTime.Now;
-            this.taxRate = DEFAULT_TAX_RATE;
-            this.item_list = new List<SalesLineItem>();
-=======
-        {
-            get { return this.saleDate; }
->>>>>>> origin/newbranch
-        }
-
-        public List<SalesLineItem> ItemList
-        {
-<<<<<<< HEAD
-            this.saleDate = DateTime.Now;
-            this.taxRate = taxRate;
-            this.item_list = new List<SalesLineItem>();
-        }
-
-
-=======
             get { return this.itemList; }
         }
 
@@ -83,7 +48,6 @@ namespace CPSC462_POS
             this.itemList = new List<SalesLineItem>();
             this.payments = new List<PaymentMethod>();
         }
->>>>>>> origin/newbranch
 
         /// <summary>
         /// 
@@ -119,8 +83,6 @@ namespace CPSC462_POS
             return getSubTotal() * (1 + taxRate);
         }
 
-<<<<<<< HEAD
-=======
         public decimal getBalance()
         {
             decimal balance = getTotal();
@@ -130,7 +92,6 @@ namespace CPSC462_POS
             }
             return balance;
         }
->>>>>>> origin/newbranch
 
         /// <summary>
         /// Find sale line item matched with item Id.
@@ -155,15 +116,13 @@ namespace CPSC462_POS
             if (foundLineItem == null)
             {
                 if (quantity > 0)
-                    itemList.Add(new SalesLineItem(itemId, quantity));
+                {
+                    SalesLineItem lineItem = new SalesLineItem(itemId, quantity);
+                    if (lineItem.getItem() != null)
+                        itemList.Add(lineItem);
+                }
             }
             else
-<<<<<<< HEAD
-                foundLineItem.addQty(qty);
-        }
-
-        public void remove_item(int product_id, int qty)
-=======
                 foundLineItem.addQty(quantity);
         }
 
@@ -174,7 +133,6 @@ namespace CPSC462_POS
         /// <param name="itemId"></param>
         /// <param name="quantity"></param>
         public void removeItem(int itemId, int quantity)
->>>>>>> origin/newbranch
         {
             SalesLineItem foundLineItem = findLineItem(itemId);
             if (foundLineItem == null) return;
@@ -183,11 +141,6 @@ namespace CPSC462_POS
 
         }
 
-<<<<<<< HEAD
-        public void update_item(int product_id, int qty)
-        {
-            SalesLineItem foundLineItem = findLineItem(product_id);
-=======
         /// <summary>
         /// Update quantity for itemId.
         /// </summary>
@@ -197,7 +150,6 @@ namespace CPSC462_POS
         public void updateItem(int itemId, int quantity)
         {
             SalesLineItem foundLineItem = findLineItem(itemId);
->>>>>>> origin/newbranch
             if (foundLineItem == null) return;
             if (quantity <= 0)
                 itemList.Remove(foundLineItem);
@@ -205,8 +157,6 @@ namespace CPSC462_POS
                 foundLineItem.setQty(quantity);
         }
 
-<<<<<<< HEAD
-=======
         /// <summary>
         /// 
         /// </summary>
@@ -222,13 +172,14 @@ namespace CPSC462_POS
         /// a new payment form so that user can choose what payment method he/she
         /// will use.</remarks>
         /// </summary>
->>>>>>> origin/newbranch
         public void createPayment()
         {
-            if (this.getBalance() > 0)
-                new FormPaymentMethod(this);
-            else if (payments.Count > 0)
-                MessageBox.Show("Payment is already made.");
+            if (this.getBalance() >= 0.01m)
+            {
+                IFormPaymentMethodView paymentForm = new FormPaymentMethod();
+                paymentForm.SetSale(this);
+            }
+            else MessageBox.Show("Payment is already made.");
         }
 
         /// <summary>
@@ -239,6 +190,18 @@ namespace CPSC462_POS
         {
             if (payment.process())
                 this.addPayment(payment);
+        }
+
+        public string PrintReceipt()
+        {
+            string result = "";
+
+            foreach (SalesLineItem lineItem in ItemList)
+            {
+                result += String.Format("{0, -5} {1, -80} {2, 14}\n", lineItem.ProductId, lineItem.ProductName, lineItem.ProductPrice.ToString("C")); 
+            }
+
+            return result;
         }
     }
 }

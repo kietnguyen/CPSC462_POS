@@ -6,12 +6,12 @@ using System.Globalization;
 
 namespace CPSC462_POS
 {
-    class Person
+    public class Person
     {
-        private string firstName;
-        private string lastName;
-        private DateTime dob;
-        private Address address;
+        protected string firstName;
+        protected string lastName;
+        protected DateTime dob;
+        protected Address address;
         private TextInfo ti = new CultureInfo("en-US", false).TextInfo;
 
         public string FirstName

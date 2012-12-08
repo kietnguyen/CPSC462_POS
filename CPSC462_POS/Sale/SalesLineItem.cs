@@ -25,21 +25,6 @@ namespace CPSC462_POS
         public decimal Subtotal
         { get { return quantity * item.Price; } }
 
-        public int Quantity
-        { get { return qty; } }
-
-        public int ProductId
-        { get { return item.id; } }
-
-        public string ProductName
-        { get { return item.name; } }
-
-        public decimal ProductPrice
-        { get { return item.price; } }
-
-        public decimal Subtotal
-        { get { return qty * item.price; } }
-
         public SalesLineItem(int product_id, int qty)
         {
             this.quantity = qty;

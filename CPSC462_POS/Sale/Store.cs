@@ -9,22 +9,33 @@ namespace CPSC462_POS
 {
     public class Store
     {
+        private int id;
         private string name;
         private Address address;
         private decimal taxRate = 0.08m;
         private List<Register> registers;
 
+        #region Properties
+
+        public int Id { get { return this.id; } }
         public string Name { get { return this.name; } }
         public string Address { get { return address.getAddress(); } }
         public decimal TaxRate { get { return taxRate; } }
 
-        public Store(string name, string address, decimal taxRate)
+        #endregion
+
+        #region Constructor
+
+        public Store(int id, string name, string address, decimal taxRate)
         {
+            this.id = id;
             this.name = name;
             this.address = new Address(address);
             this.taxRate = taxRate;
             this.registers = new List<Register>();
         }
+
+        #endregion
 
         public int getNumberOfRegisters()
         {

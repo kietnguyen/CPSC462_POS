@@ -12,3 +12,26 @@ Connect to mySQL using C#
 
 To TitleCase
 	http://msdn.microsoft.com/en-us/library/system.globalization.textinfo.totitlecase.aspx
+
+DateTime.ToString
+	http://msdn.microsoft.com/en-us/library/zdtaw1bw.aspx
+
+using Statement
+	http://msdn.microsoft.com/en-us/library/yh598w02.aspx
+	http://stackoverflow.com/questions/10146979/reuse-of-sqlconnection-and-sqldatareader (with SqlDataReader)
+
+Align string with spaces
+	http://www.csharp-examples.net/align-string-with-spaces/
+
+Standard Numeric Format Strings
+	http://msdn.microsoft.com/en-us/library/dwhawy9k.aspx
+
+SharpSSH
+	http://sourceforge.net/projects/sharpssh/
+
+Access MySQL Through SSH Tunnel in a Windows .NET Application
+	http://georgelantz.com/2007/09/10/access-mysql-through-ssh-tunnel-in-a-windows-net-application/
+	(not using because it might need to do bind-address in my.cnf file...)
+
+School MySQL server tutorial:
+	http://wang.ecs.fullerton.edu/cpsc431/mysql.html

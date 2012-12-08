@@ -30,7 +30,7 @@ namespace CPSC462_POS_Test
             string name = "ABC Market";
             string address = "123 Somewhere St, aCity, aState 00000";
             decimal taxRate = 0.08m;
-            Store target = new Store(name, address, taxRate);
+            Store target = new Store(1, name, address, taxRate);
 
             Register aRegister = new Register(1234,target);
             target.addRegister(aRegister);
@@ -47,7 +47,7 @@ namespace CPSC462_POS_Test
             string name = "ABC Market";
             string address = "123 Somewhere St, aCity, aState 00000";
             decimal taxRate = 0.08m;
-            Store target = new Store(name, address, taxRate);
+            Store target = new Store(1, name, address, taxRate);
 
             Assert.AreEqual(0, target.getNumberOfRegisters());
 
@@ -64,7 +64,7 @@ namespace CPSC462_POS_Test
             string name = "ABC Market";
             string address = "123 Somewhere St, aCity, aState 00000";
             decimal taxRate = 0.08m;
-            Store target = new Store(name, address, taxRate);
+            Store target = new Store(1, name, address, taxRate);
 
             Register aRegister = new Register(1234);
             target.addRegister(aRegister);

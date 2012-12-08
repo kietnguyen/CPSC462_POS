@@ -12,21 +12,13 @@ namespace CPSC462_POS
 {
     public partial class FormPOS : Form, IFormPOSView
     {
-<<<<<<< HEAD
-        private Register aRegister;
-
-        public FormPOS()
-        {
-            InitializeComponent();
-            aRegister = new Register(0);
-            aRegister.createNewSale();
-=======
         public FormPOS()
         {
             InitializeComponent();
 
-            SetRegister(new Register(0,new Store("ABC","123 Abc St, ABC, CA 99999", 0.08m)));
->>>>>>> origin/newbranch
+            Store store = new Store(1, "ABC","123 Abc St, ABC, CA 99999", 0.08m);
+            Cashier cashier = new Cashier(store, 1, 1200m, "CashierA", "", "1/1/1988", "123 Abc St, ABC, CA 99999");
+            setRegister(new Register(1, store, cashier));
         }
 
         private Register register;
@@ -36,37 +28,20 @@ namespace CPSC462_POS
         /** Handle event when user presses "Enter" or "Return" key in "Item #" text box. */
         private void tbItemNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Return || e.KeyChar == (char)Keys.Enter)
+            if ((e.KeyChar == (char)Keys.Return || e.KeyChar == (char)Keys.Enter) 
+                && (tbItemNo.Text.Length > 0))
             {
-<<<<<<< HEAD
-                int itemId = textboxToPosInt(tbItemNo, "Item Id must be a positive integer.");
-                int quantity = textboxToPosInt(tbQuantity, "Quatity must be a positive integer.", true);
-
-                aRegister.addItem(itemId, quantity);
-                updateLineItem();
-=======
-                if (tbItemNo.Text == "") return;
-                AddLineItem();
->>>>>>> origin/newbranch
+                addLineItem();
             }
         }
 
         /** Handle event when user presses "Enter" or "Return" key in "Quantity" text box. */
         private void tbQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Return || e.KeyChar == (char)Keys.Enter)
+            if ((e.KeyChar == (char)Keys.Return || e.KeyChar == (char)Keys.Enter)
+                 && (tbQuantity.Text.Length > 0))
             {
-<<<<<<< HEAD
-                int itemId = textboxToPosInt(tbItemNo, "Item Id must be a positive integer.");
-                int quantity = textboxToPosInt(tbQuantity, "Quatity must be a positive integer.", true);
-
-                if (dgItemLine.SelectedCells.Count > 0)
-                    aRegister.updateItem(itemId, quantity);
-                else
-                    aRegister.addItem(itemId, quantity);
-=======
-                if (tbItemNo.Text == "") return;
-                AddLineItem();
+                addLineItem();
             }
         }
 
@@ -75,91 +50,96 @@ namespace CPSC462_POS
         {
             /** Ignore when nothing is selected. */
             if (e.RowIndex < 0) return;
-            SelectLineItem(e.RowIndex);
+            selectLineItem(e.RowIndex);
         }
->>>>>>> origin/newbranch
 
         /** Handle event when user clicks "Change Quantity" button. */
         private void btnChangeQuantity_Click(object sender, EventArgs e)
         {
             if (tbItemNo.Text == "") return;
-            UpdateQuantity();
+            updateQuantity();
         }
 
-<<<<<<< HEAD
-        private int textboxToPosInt(TextBox tb, string errMessage, bool defaultOne = false)
-        {
-            int num = 0;
-            tb.Text = ((defaultOne & tb.Text == "") ? "1" : tb.Text);
-
-            try
-            {
-                num = Convert.ToInt32(tb.Text);
-                tb.Clear();
-            }
-            catch (FormatException e)
-            {
-                if (errMessage.Length > 0)
-                    MessageBox.Show(e.Message);
-                else throw e;
-            }
-=======
         /** Handle event when user clicks "Void Item" button. */
         private void btnItemVoid_Click(object sender, EventArgs e)
         {
             if (tbItemNo.Text == "") return;
-            VoidLineItem();
-        }
-
-        /** Handle event when user clicks "Void Sale" button. */
-        private void btnVoidSale_Click(object sender, EventArgs e)
-        {
-            VoidSale();
+            voidLineItem();
         }
 
         /** Handle event when user clicks "Make Payment" button. */
         private void btnMakePayment_Click(object sender, EventArgs e)
         {
-            MakePayment();
+            makePayment();
+        }
+
+        /// <summary>
+        /// Handle event when user clicks "Print Receipt" button.
+        /// </summary>
+        /// <param name="sender">"Print Receipt" button</param>
+        /// <param name="e">Click event</param>
+        private void btnPrintReceipt_Click(object sender, EventArgs e)
+        {
+            printReceipt();
+        }
+
+        /// <summary>
+        /// Handle event when user are done with "Payment Method" form
+        /// </summary>
+        /// <param name="sender">POS form</param>
+        /// <param name="e">Activate event</param>
+        private void FormPOS_Activated(object sender, EventArgs e)
+        {
+            updateSaleView();
+        }
+
+        private void btnNewSale_Click(object sender, EventArgs e)
+        {
+            createNewSale();
         }
 
         #endregion
 
         #region IFormPOSView implementation
 
-        public void SetRegister(Register register)
+        public void setRegister(Register register)
         {
             this.register = register;
         }
 
-        public void AddLineItem()
+        public void createNewSale()
+        {
+            register.createNewSale();
+            updateSaleView();
+        }
+
+        public void addLineItem()
         {
             if (dgItemLine.SelectedCells.Count > 0)
                 register.updateItem(ItemNoEnter, QuantityEnter);
             else
                 register.addItem(ItemNoEnter, QuantityEnter);
 
-            UpdateSaleView();
+            updateSaleView();
         }
 
-        public void VoidLineItem()
+        public void voidLineItem()
         {
             /** This happens ONLY WHEN THERE IS AN ERROR. */
             if (ItemNoEnter == 0) return;
             register.voidItem(ItemNoEnter);
-            UpdateSaleView();
+            updateSaleView();
         }
->>>>>>> origin/newbranch
 
-        public void UpdateQuantity()
+        public void updateQuantity()
         {
             /** This happens ONLY WHEN THERE IS AN ERROR. */
             if (ItemNoEnter == 0) return;
             register.updateItem(ItemNoEnter, QuantityEnter);
-            UpdateSaleView();
+            updateSaleView();
         }
 
-        public void SelectLineItem(int index)
+        public void selectLineItem(int index)
         {
             DataGridViewRow row = dgItemLine.Rows[index];
             tbItemNo.Text = row.Cells[0].Value.ToString();
@@ -170,23 +150,9 @@ namespace CPSC462_POS
         /// Update line item view in new-to-old order.
         /// Each line contains item number, name, quantity, unit price, and sub-total.
         /// </summary>
-        public void UpdateSaleView()
+        public void updateSaleView()
         {
-            /*
             dgItemLine.Rows.Clear();
-<<<<<<< HEAD
-            foreach (SalesLineItem lineItem in aRegister.Sale.ItemList.Reverse<SalesLineItem>())
-            {
-                ProductSpecification aItem = lineItem.getItem();
-                dgItemLine.Rows.Add(aItem.id, aItem.name, lineItem.getQty(),
-                                    aItem.price.ToString("C"), lineItem.getPrice().ToString("C"));
-            }
-            tbSubtotal.Text = aRegister.Sale.getSubTotal().ToString("C");
-            tbTax.Text = aRegister.Sale.getTax().ToString("C");
-            tbTotal.Text = aRegister.Sale.getTotal().ToString("C");
-
-            dgItemLine.ClearSelection();*/
-=======
             foreach (SalesLineItem lineItem in register.Sale.ItemList.Reverse<SalesLineItem>())
             {
                 Item anItem = lineItem.getItem();
@@ -198,45 +164,29 @@ namespace CPSC462_POS
             }
             dgItemLine.ClearSelection();
 
-            tbSubtotal.Text = SubTotalDisplay;
-            tbTax.Text = TaxDisplay;
-            tbTotal.Text = TotalDisplay;
->>>>>>> origin/newbranch
+            lblSubTotalVal.Text = SubTotalDisplay;
+            lblTaxVal.Text = TaxDisplay;
+            lblTotalVal.Text = TotalDisplay;
+            lblBalanceDueVal.Text = BalanceDisplay;
+            lblSaleDateVal.Text = DateDisplay;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void VoidSale()
+        public void makePayment()
         {
-            register.voidSale();
-            UpdateSaleView();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void MakePayment()
-        {
-<<<<<<< HEAD
-            int itemId = textboxToPosInt(tbItemNo, "Item Id must be a positive integer.");
-            int quantity = textboxToPosInt(tbQuantity, "Quatity must be a positive integer.", true);
-
-            aRegister.Sale.update_item(itemId, quantity);
-            updateLineItem();
-=======
             register.makePayment();
-            UpdateSaleView();
+            updateSaleView();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void PrintReceipt()
+        public void printReceipt()
         {
             register.printReceipt();
-            UpdateSaleView();
->>>>>>> origin/newbranch
+            updateSaleView();
         }
 
         /** Integer value in "Item #" text box. */
@@ -244,31 +194,70 @@ namespace CPSC462_POS
         {
             get
             {
-                return TextBoxParser.GetInstance.tbToPosInt(tbItemNo, "Item Id must be a positive integer.");
+                int num = 0;
+
+                try
+                {
+                    num = Convert.ToInt32(tbItemNo.Text);
+                }
+                catch (FormatException fe)
+                {
+                    MessageBox.Show("Item number must have a numerical format.", "Invalid item number");
+                }
+                finally
+                {
+                    tbItemNo.Text = "";
+                }
+
+                if (num < 0)
+                {
+                    MessageBox.Show("Item number must have a positive value.", "Invalid item number");
+                    tbItemNo.Text = "";
+                }
+
+                return num;
             }
             set
             {
-                ItemNoEnter = TextBoxParser.GetInstance.tbToPosInt(tbItemNo, "Item Id must be a positive integer.");
+                tbItemNo.Text = value.ToString("D10");
             }
         }
 
         /** Integer value in "Quantity" text box. */
         public int QuantityEnter
         {
-<<<<<<< HEAD
-            int itemId = textboxToPosInt(tbItemNo, "Item Id must be a positive integer.");
-            int quantity = textboxToPosInt(tbQuantity, "Quatity must be a positive integer.", true);
-
-            aRegister.Sale.remove_item(itemId, quantity);
-            updateLineItem();
-=======
             get
             {
-                return TextBoxParser.GetInstance.tbToPosInt(tbQuantity, "Quatity must be a positive integer.", true);
+                int num = 0;
+                if (tbQuantity.Text == "")
+                {
+                    tbQuantity.Text = "1";
+                }
+
+                try
+                {
+                    num = Convert.ToInt32(tbQuantity.Text);
+                }
+                catch (FormatException fe)
+                {
+                    MessageBox.Show("Quantity must have a numerical format.", "Invalid quantity");
+                }
+                finally
+                {
+                    tbQuantity.Text = "";
+                }
+
+                if (num < 0)
+                {
+                    MessageBox.Show("Quantity must have a positive value.", "Invalid quantity");
+                    tbQuantity.Text = "";
+                }
+
+                return num;
             }
             set
             {
-                QuantityEnter = TextBoxParser.GetInstance.tbToPosInt(tbQuantity, "Quatity must be a positive integer.", true);
+                tbQuantity.Text = value.ToString();
             }
         }
 
@@ -279,7 +268,10 @@ namespace CPSC462_POS
             {
                 return register.Sale.getSubTotal().ToString("C");
             }
->>>>>>> origin/newbranch
+            set
+            {
+                lblSubTotalVal.Text = value;
+            }
         }
 
         /** Value in "Tax" text box in Currency string format. */
@@ -288,6 +280,10 @@ namespace CPSC462_POS
             get
             {
                 return register.Sale.getTax().ToString("C");
+            }
+            set
+            {
+                lblTaxVal.Text = value;
             }
         }
 
@@ -298,8 +294,23 @@ namespace CPSC462_POS
             {
                 return register.Sale.getTotal().ToString("C");
             }
+            set
+            {
+                lblTotalVal.Text = value;
+            }
+        }
+
+        public string DateDisplay
+        {
+            get { return register.Sale.SaleDate.ToString(); }
+        }
+
+        public string BalanceDisplay
+        {
+            get { return register.Sale.getBalance().ToString("C"); }
         }
 
         #endregion 
+
     }
 }

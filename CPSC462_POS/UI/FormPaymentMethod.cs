@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace CPSC462_POS.UI
 {
-    public partial class FormPaymentMethod : Form
+    public partial class FormPaymentMethod : Form, IFormPaymentMethodView
     {
         private Sale sale;
 
@@ -17,65 +17,104 @@ namespace CPSC462_POS.UI
         /// 
         /// </summary>
         /// <param name="sale"></param>
-        public FormPaymentMethod(Sale sale)
+        public FormPaymentMethod()
         {
             InitializeComponent();
-            this.sale = sale;
+        }
 
-            lblBalanceNo.Text = sale.getTotal().ToString("C");
-            this.ShowDialog();
+        #region Events implementation
+
+        /// <summary>
+        /// Handle payment when "Cash" button is clicked.
+        /// </summary>
+        /// <param name="sender">"Cash" button</param>
+        /// <param name="e">Click event</param>
+        private void cashBtn_Click(object sender, EventArgs e)
+        {
+            PayByCash();
         }
 
         /// <summary>
-        /// 
+        /// Handle event when "Credit Card" button is clicked.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cashBtn_Click(object sender, EventArgs e)
+        /// <param name="sender">"Credit Card" button</param>
+        /// <param name="e">Click event</param>
+        private void creditCardBtn_Click(object sender, EventArgs e)
         {
-            decimal amount = TextBoxParser.GetInstance.tbToPosDecimal(tbEnterAmount);
-            if (amount == 0) return;
+            PayByCreditCard();
+        }
 
+        /// <summary>
+        /// Handle event when "Check" button is clicked.
+        /// </summary>
+        /// <param name="sender">"Check" button</param>
+        /// <param name="e">Click event</param>
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            PayByCheck();
+        }
+
+        #endregion
+
+        #region IFormPaymentMethodView implementaton
+
+        /// <summary>
+        /// Assign "Payment Method" form for sale object
+        /// </summary>
+        /// <param name="sale"></param>
+        public void SetSale(Sale sale)
+        {
+            this.sale = sale;
+            lblBalanceNo.Text = sale.getBalance().ToString("C");
+            this.Show();
+        }
+
+        /// <summary>
+        /// Update "Payment Method" form view
+        /// </summary>
+        public void UpdatePaymentMethodView()
+        {
+            decimal balance = sale.getBalance();
+            BalanceDisplay = balance.ToString("C");
+
+            if (balance.ToString("C") == "$0.00")
+            {
+                this.Dispose();
+                return;
+            }
+
+        }
+
+        /// <summary>
+        /// Implement PayByCash method
+        /// </summary>
+        public void PayByCash()
+        {
+            decimal balance = sale.getBalance();
+            decimal amountEnter = Amount;
+            decimal amount = (amountEnter > balance ? balance : amountEnter);
             PaymentMethod payment = new CashPayment(amount);
 
+            if (amountEnter > balance)
+            {
+                decimal change = amountEnter - balance;
+                MessageBox.Show("Your change is " + change.ToString("C"));
+            }
             sale.processPayment(payment);
             UpdatePaymentMethodView();
         }
 
         /// <summary>
-        /// 
+        /// Implement PayByCheck method
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void creditCardBtn_Click(object sender, EventArgs e)
+        public void PayByCheck()
         {
-            decimal amount = TextBoxParser.GetInstance.tbToPosDecimal(tbEnterAmount);
-            if (amount == 0) return;
-
-            PaymentMethod payment = new CreditCardPayment(amount);
-
-            if (amount <= sale.getBalance())
-            {
-                sale.processPayment(payment);
-                UpdatePaymentMethodView();
-            }
-            else
-                MessageBox.Show("Your credit card payment cannot be greater than your balance.");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCheck_Click(object sender, EventArgs e)
-        {
-            decimal amount = TextBoxParser.GetInstance.tbToPosDecimal(tbEnterAmount);
-            if (amount == 0) return;
-
+            decimal balance = sale.getBalance();
+            decimal amountEnter = Amount;
+            decimal amount = (amountEnter > balance ? balance : amountEnter);
             PaymentMethod payment = new CheckPayment(amount);
 
-            if (amount <= sale.getBalance())
+            if (amountEnter <= balance)
             {
                 sale.processPayment(payment);
                 UpdatePaymentMethodView();
@@ -83,23 +122,73 @@ namespace CPSC462_POS.UI
             else
                 MessageBox.Show("Your check payment cannot be greater than your balance.");
 
-
         }
 
-        private void UpdatePaymentMethodView()
+        /// <summary>
+        /// Implement PayByCreditCard method
+        /// </summary>
+        public void PayByCreditCard()
         {
             decimal balance = sale.getBalance();
-            lblBalanceNo.Text = balance.ToString("C");
-            
-            if (balance.Equals(0))
-                this.Close();
+            decimal amountEnter = Amount;
+            decimal amount = (amountEnter > balance ? balance : amountEnter);
+            PaymentMethod payment = new CreditCardPayment(amount);
 
-            if (balance < 0m)
+            if (amountEnter <= balance)
             {
-                MessageBox.Show("Your change is " + (-balance).ToString("C"));
-                this.Close();
+                sale.processPayment(payment);
+                UpdatePaymentMethodView();
+            }
+            else
+                MessageBox.Show("Your credit card payment cannot be greater than your balance.");
+ 
+        }
+
+        /// <summary>
+        /// Implement Balance amount displayed on the form
+        /// </summary>
+        public string BalanceDisplay
+        {
+            get { return sale.getBalance().ToString("C"); }
+            set { lblBalanceNo.Text = value; }
+        }
+
+        /// <summary>
+        /// Implement the amount user will pay
+        /// </summary>
+        public decimal Amount
+        {
+            get
+            {
+                decimal amount = 0;
+
+                try
+                {
+                    amount = Convert.ToInt32(tbEnterAmount.Text);
+                }
+                catch (FormatException fe)
+                {
+                    MessageBox.Show("Amount must have a numerical format.", "Invalid amount");
+                }
+                finally
+                {
+                    tbEnterAmount.Text = "";
+                }
+
+                if (amount < 0)
+                {
+                    MessageBox.Show("Amount must have a positive value.", "Invalid amount");
+                    tbEnterAmount.Text = "";
+                }
+
+                return amount;
+            }
+            set
+            {
+                tbEnterAmount.Text = value.ToString("C");
             }
         }
 
+        #endregion
     }
 }

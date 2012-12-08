@@ -81,7 +81,6 @@
     <Compile Include="RegisterTest.cs" />
     <Compile Include="SaleTest.cs" />
     <Compile Include="StoreTest.cs" />
-    <Compile Include="StringParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CPSC462_POS\CPSC462_POS.csproj">

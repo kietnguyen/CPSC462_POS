@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace CPSC462_POS
 {
@@ -11,6 +12,10 @@ namespace CPSC462_POS
         private Sale sale;
         private Store store;
         private Cashier cashier;
+        private int p;
+        private CPSC462_POS.Store target;
+
+        #region Properties
 
         public int Id
         {
@@ -22,10 +27,25 @@ namespace CPSC462_POS
             get { return sale; }
         }
 
-        public Register(int registerId, Store store)
+        public Store Store
+        {
+            get { return store; }
+        }
+
+        public Cashier Cashier
+        {
+            get { return cashier; }
+        }
+
+        #endregion
+
+        #region Constructor
+
+        public Register(int registerId, Store store, Cashier cashier)
         {
             this.id = registerId;
             this.store = store;
+            this.cashier = cashier;
             createNewSale();
         }
 
@@ -35,29 +55,22 @@ namespace CPSC462_POS
             createNewSale();
         }
 
-<<<<<<< HEAD
-        public Sale Sale
+        public Register(int registerId, Store store)
         {
-            get { return aSale; }
-=======
+            this.id = registerId;
+            this.store = store;
+        }
+
+        #endregion
+
         public decimal getTaxRate()
         {
             return store.TaxRate;
->>>>>>> origin/newbranch
         }
 
         public void addItem(int itemId, int quantity)
         {
-<<<<<<< HEAD
-            aSale.add_item(itemId, quantity);
-        }
-
-        public void updateItem(int itemId, int quantity)
-        {
-            aSale.update_item(itemId, quantity);
-=======
             sale.addItem(itemId, quantity);
->>>>>>> origin/newbranch
         }
 
         public void updateItem(int itemId, int quantity)
@@ -70,21 +83,13 @@ namespace CPSC462_POS
             sale.updateItem(itemId, 0);
         }
 
-        public void voidSale()
-        {
-            // report to database
-            createNewSale();
-        }
-
         public void createNewSale()
         {
-<<<<<<< HEAD
-            aSale = new Sale();
-=======
-            sale = new Sale(store.TaxRate);
->>>>>>> origin/newbranch
-        }
+            if (this.sale != null && Sale.Payments.Count > 0)
+                DBConnect.GetInstance.insertReceipt(this);
 
+            sale = new Sale(store.TaxRate);
+        }
 
         public void makePayment()
         {
@@ -93,7 +98,7 @@ namespace CPSC462_POS
 
         public void printReceipt()
         {
-
+            MessageBox.Show(sale.PrintReceipt());
         }
     }
 }

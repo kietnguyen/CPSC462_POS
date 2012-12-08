@@ -25,7 +25,7 @@ namespace CPSC462_POS.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10.67.31.89")]
+        [global::System.Configuration.DefaultSettingValueAttribute("dkla.net")]
         public string db_server {
             get {
                 return ((string)(this["db_server"]));
@@ -34,7 +34,7 @@ namespace CPSC462_POS.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cpsc462_pos")]
+        [global::System.Configuration.DefaultSettingValueAttribute("cpsc462")]
         public string db_name {
             get {
                 return ((string)(this["db_name"]));
@@ -43,7 +43,7 @@ namespace CPSC462_POS.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cpsc462_pos")]
+        [global::System.Configuration.DefaultSettingValueAttribute("cpsc462")]
         public string db_uid {
             get {
                 return ((string)(this["db_uid"]));
@@ -52,7 +52,7 @@ namespace CPSC462_POS.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("aaaa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("test123")]
         public string db_password {
             get {
                 return ((string)(this["db_password"]));

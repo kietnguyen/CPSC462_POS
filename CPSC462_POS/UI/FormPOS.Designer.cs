@@ -28,38 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< HEAD
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-=======
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
->>>>>>> origin/newbranch
             this.lblItemNo = new System.Windows.Forms.Label();
             this.tbItemNo = new System.Windows.Forms.TextBox();
             this.dgItemLine = new System.Windows.Forms.DataGridView();
+            this.ItemNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnChangeQuantity = new System.Windows.Forms.Button();
             this.lblSubtotal = new System.Windows.Forms.Label();
             this.btnMakePayment = new System.Windows.Forms.Button();
-            this.btnVoidSale = new System.Windows.Forms.Button();
             this.lblTax = new System.Windows.Forms.Label();
             this.lblFinalTotal = new System.Windows.Forms.Label();
-            this.tbSubtotal = new System.Windows.Forms.TextBox();
-            this.tbTax = new System.Windows.Forms.TextBox();
-            this.tbTotal = new System.Windows.Forms.TextBox();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.tbQuantity = new System.Windows.Forms.TextBox();
             this.btnPrintReceipt = new System.Windows.Forms.Button();
             this.btnVoidItem = new System.Windows.Forms.Button();
-            this.salesLineItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnNewSale = new System.Windows.Forms.Button();
+            this.lblSaleDate = new System.Windows.Forms.Label();
+            this.lblBalanceDue = new System.Windows.Forms.Label();
+            this.lblSubTotalVal = new System.Windows.Forms.Label();
+            this.lblTaxVal = new System.Windows.Forms.Label();
+            this.lblTotalVal = new System.Windows.Forms.Label();
+            this.lblSaleDateVal = new System.Windows.Forms.Label();
+            this.lblBalanceDueVal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgItemLine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.salesLineItemBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblItemNo
@@ -86,8 +82,6 @@
             this.dgItemLine.AllowUserToDeleteRows = false;
             this.dgItemLine.AllowUserToResizeColumns = false;
             this.dgItemLine.AllowUserToResizeRows = false;
-<<<<<<< HEAD
-            this.dgItemLine.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -96,27 +90,14 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgItemLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-=======
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgItemLine.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
->>>>>>> origin/newbranch
             this.dgItemLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgItemLine.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.productIdDataGridViewTextBoxColumn,
-            this.productNameDataGridViewTextBoxColumn,
-            this.quantityDataGridViewTextBoxColumn,
-            this.productPriceDataGridViewTextBoxColumn,
-            this.subtotalDataGridViewTextBoxColumn});
+            this.ItemNo,
+            this.Description,
+            this.Quantity,
+            this.Price,
+            this.Total});
             this.dgItemLine.Cursor = System.Windows.Forms.Cursors.Default;
-<<<<<<< HEAD
-            this.dgItemLine.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.salesLineItemBindingSource, "ProductId", true));
-            this.dgItemLine.DataSource = this.salesLineItemBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -125,21 +106,11 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgItemLine.DefaultCellStyle = dataGridViewCellStyle2;
-=======
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgItemLine.DefaultCellStyle = dataGridViewCellStyle4;
->>>>>>> origin/newbranch
+            this.dgItemLine.Enabled = false;
             this.dgItemLine.Location = new System.Drawing.Point(8, 61);
             this.dgItemLine.Margin = new System.Windows.Forms.Padding(0);
             this.dgItemLine.MultiSelect = false;
             this.dgItemLine.Name = "dgItemLine";
-            this.dgItemLine.ReadOnly = true;
             this.dgItemLine.RowHeadersVisible = false;
             this.dgItemLine.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgItemLine.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -150,9 +121,49 @@
             this.dgItemLine.TabIndex = 20;
             this.dgItemLine.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgItemLine_CellClick);
             // 
+            // ItemNo
+            // 
+            this.ItemNo.HeaderText = "Item No";
+            this.ItemNo.MinimumWidth = 80;
+            this.ItemNo.Name = "ItemNo";
+            this.ItemNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ItemNo.Width = 80;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Description";
+            this.Description.MinimumWidth = 120;
+            this.Description.Name = "Description";
+            this.Description.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Description.Width = 120;
+            // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.MinimumWidth = 52;
+            this.Quantity.Name = "Quantity";
+            this.Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Quantity.Width = 52;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.MinimumWidth = 54;
+            this.Price.Name = "Price";
+            this.Price.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Price.Width = 54;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.MinimumWidth = 60;
+            this.Total.Name = "Total";
+            this.Total.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Total.Width = 60;
+            // 
             // btnChangeQuantity
             // 
-            this.btnChangeQuantity.Location = new System.Drawing.Point(385, 61);
+            this.btnChangeQuantity.Location = new System.Drawing.Point(385, 103);
             this.btnChangeQuantity.Name = "btnChangeQuantity";
             this.btnChangeQuantity.Size = new System.Drawing.Size(86, 36);
             this.btnChangeQuantity.TabIndex = 30;
@@ -164,7 +175,7 @@
             // 
             this.lblSubtotal.AutoSize = true;
             this.lblSubtotal.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubtotal.Location = new System.Drawing.Point(319, 275);
+            this.lblSubtotal.Location = new System.Drawing.Point(317, 277);
             this.lblSubtotal.Name = "lblSubtotal";
             this.lblSubtotal.Size = new System.Drawing.Size(60, 18);
             this.lblSubtotal.TabIndex = 4;
@@ -172,7 +183,7 @@
             // 
             // btnMakePayment
             // 
-            this.btnMakePayment.Location = new System.Drawing.Point(385, 187);
+            this.btnMakePayment.Location = new System.Drawing.Point(387, 187);
             this.btnMakePayment.Name = "btnMakePayment";
             this.btnMakePayment.Size = new System.Drawing.Size(86, 36);
             this.btnMakePayment.TabIndex = 40;
@@ -180,21 +191,11 @@
             this.btnMakePayment.UseVisualStyleBackColor = true;
             this.btnMakePayment.Click += new System.EventHandler(this.btnMakePayment_Click);
             // 
-            // btnVoidSale
-            // 
-            this.btnVoidSale.Location = new System.Drawing.Point(385, 145);
-            this.btnVoidSale.Name = "btnVoidSale";
-            this.btnVoidSale.Size = new System.Drawing.Size(86, 36);
-            this.btnVoidSale.TabIndex = 50;
-            this.btnVoidSale.Text = "Void Sale";
-            this.btnVoidSale.UseVisualStyleBackColor = true;
-            this.btnVoidSale.Click += new System.EventHandler(this.btnVoidSale_Click);
-            // 
             // lblTax
             // 
             this.lblTax.AutoSize = true;
             this.lblTax.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTax.Location = new System.Drawing.Point(351, 293);
+            this.lblTax.Location = new System.Drawing.Point(349, 295);
             this.lblTax.Name = "lblTax";
             this.lblTax.Size = new System.Drawing.Size(28, 18);
             this.lblTax.TabIndex = 7;
@@ -204,35 +205,11 @@
             // 
             this.lblFinalTotal.AutoSize = true;
             this.lblFinalTotal.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinalTotal.Location = new System.Drawing.Point(269, 313);
+            this.lblFinalTotal.Location = new System.Drawing.Point(267, 315);
             this.lblFinalTotal.Name = "lblFinalTotal";
             this.lblFinalTotal.Size = new System.Drawing.Size(110, 23);
             this.lblFinalTotal.TabIndex = 8;
             this.lblFinalTotal.Text = "FINAL TOTAL";
-            // 
-            // tbSubtotal
-            // 
-            this.tbSubtotal.Enabled = false;
-            this.tbSubtotal.Location = new System.Drawing.Point(385, 273);
-            this.tbSubtotal.Name = "tbSubtotal";
-            this.tbSubtotal.Size = new System.Drawing.Size(86, 20);
-            this.tbSubtotal.TabIndex = 60;
-            // 
-            // tbTax
-            // 
-            this.tbTax.Enabled = false;
-            this.tbTax.Location = new System.Drawing.Point(385, 291);
-            this.tbTax.Name = "tbTax";
-            this.tbTax.Size = new System.Drawing.Size(86, 20);
-            this.tbTax.TabIndex = 70;
-            // 
-            // tbTotal
-            // 
-            this.tbTotal.Enabled = false;
-            this.tbTotal.Location = new System.Drawing.Point(385, 313);
-            this.tbTotal.Name = "tbTotal";
-            this.tbTotal.Size = new System.Drawing.Size(86, 20);
-            this.tbTotal.TabIndex = 80;
             // 
             // lblQuantity
             // 
@@ -255,16 +232,17 @@
             // 
             // btnPrintReceipt
             // 
-            this.btnPrintReceipt.Location = new System.Drawing.Point(385, 229);
+            this.btnPrintReceipt.Location = new System.Drawing.Point(387, 229);
             this.btnPrintReceipt.Name = "btnPrintReceipt";
             this.btnPrintReceipt.Size = new System.Drawing.Size(86, 36);
             this.btnPrintReceipt.TabIndex = 81;
             this.btnPrintReceipt.Text = "Print Receipt";
             this.btnPrintReceipt.UseVisualStyleBackColor = true;
+            this.btnPrintReceipt.Click += new System.EventHandler(this.btnPrintReceipt_Click);
             // 
             // btnVoidItem
             // 
-            this.btnVoidItem.Location = new System.Drawing.Point(385, 103);
+            this.btnVoidItem.Location = new System.Drawing.Point(385, 145);
             this.btnVoidItem.Name = "btnVoidItem";
             this.btnVoidItem.Size = new System.Drawing.Size(86, 36);
             this.btnVoidItem.TabIndex = 82;
@@ -272,70 +250,115 @@
             this.btnVoidItem.UseVisualStyleBackColor = true;
             this.btnVoidItem.Click += new System.EventHandler(this.btnItemVoid_Click);
             // 
-            // salesLineItemBindingSource
+            // btnNewSale
             // 
-            this.salesLineItemBindingSource.DataSource = typeof(CPSC462_POS.SalesLineItem);
+            this.btnNewSale.Location = new System.Drawing.Point(384, 61);
+            this.btnNewSale.Name = "btnNewSale";
+            this.btnNewSale.Size = new System.Drawing.Size(86, 36);
+            this.btnNewSale.TabIndex = 30;
+            this.btnNewSale.Text = "Create New Sale";
+            this.btnNewSale.UseVisualStyleBackColor = true;
+            this.btnNewSale.Click += new System.EventHandler(this.btnNewSale_Click);
             // 
-            // productIdDataGridViewTextBoxColumn
+            // lblSaleDate
             // 
-            this.productIdDataGridViewTextBoxColumn.DataPropertyName = "ProductId";
-            this.productIdDataGridViewTextBoxColumn.HeaderText = "ProductId";
-            this.productIdDataGridViewTextBoxColumn.Name = "productIdDataGridViewTextBoxColumn";
-            this.productIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lblSaleDate.AutoSize = true;
+            this.lblSaleDate.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaleDate.Location = new System.Drawing.Point(5, 277);
+            this.lblSaleDate.Name = "lblSaleDate";
+            this.lblSaleDate.Size = new System.Drawing.Size(41, 18);
+            this.lblSaleDate.TabIndex = 83;
+            this.lblSaleDate.Text = "Date:";
             // 
-            // productNameDataGridViewTextBoxColumn
+            // lblBalanceDue
             // 
-            this.productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
-            this.productNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lblBalanceDue.AutoSize = true;
+            this.lblBalanceDue.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBalanceDue.ForeColor = System.Drawing.Color.Red;
+            this.lblBalanceDue.Location = new System.Drawing.Point(4, 297);
+            this.lblBalanceDue.Name = "lblBalanceDue";
+            this.lblBalanceDue.Size = new System.Drawing.Size(113, 23);
+            this.lblBalanceDue.TabIndex = 8;
+            this.lblBalanceDue.Text = "Balance Due:";
             // 
-            // quantityDataGridViewTextBoxColumn
+            // lblSubTotalVal
             // 
-            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            this.quantityDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lblSubTotalVal.AutoSize = true;
+            this.lblSubTotalVal.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubTotalVal.ForeColor = System.Drawing.Color.Green;
+            this.lblSubTotalVal.Location = new System.Drawing.Point(383, 277);
+            this.lblSubTotalVal.Name = "lblSubTotalVal";
+            this.lblSubTotalVal.Size = new System.Drawing.Size(0, 18);
+            this.lblSubTotalVal.TabIndex = 85;
             // 
-            // productPriceDataGridViewTextBoxColumn
+            // lblTaxVal
             // 
-            this.productPriceDataGridViewTextBoxColumn.DataPropertyName = "ProductPrice";
-            this.productPriceDataGridViewTextBoxColumn.HeaderText = "ProductPrice";
-            this.productPriceDataGridViewTextBoxColumn.Name = "productPriceDataGridViewTextBoxColumn";
-            this.productPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lblTaxVal.AutoSize = true;
+            this.lblTaxVal.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaxVal.ForeColor = System.Drawing.Color.Green;
+            this.lblTaxVal.Location = new System.Drawing.Point(383, 295);
+            this.lblTaxVal.Name = "lblTaxVal";
+            this.lblTaxVal.Size = new System.Drawing.Size(0, 18);
+            this.lblTaxVal.TabIndex = 85;
             // 
-            // subtotalDataGridViewTextBoxColumn
+            // lblTotalVal
             // 
-            this.subtotalDataGridViewTextBoxColumn.DataPropertyName = "Subtotal";
-            this.subtotalDataGridViewTextBoxColumn.HeaderText = "Subtotal";
-            this.subtotalDataGridViewTextBoxColumn.Name = "subtotalDataGridViewTextBoxColumn";
-            this.subtotalDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lblTotalVal.AutoSize = true;
+            this.lblTotalVal.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalVal.ForeColor = System.Drawing.Color.Green;
+            this.lblTotalVal.Location = new System.Drawing.Point(383, 315);
+            this.lblTotalVal.Name = "lblTotalVal";
+            this.lblTotalVal.Size = new System.Drawing.Size(0, 23);
+            this.lblTotalVal.TabIndex = 85;
+            // 
+            // lblSaleDateVal
+            // 
+            this.lblSaleDateVal.AutoSize = true;
+            this.lblSaleDateVal.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaleDateVal.Location = new System.Drawing.Point(52, 277);
+            this.lblSaleDateVal.Name = "lblSaleDateVal";
+            this.lblSaleDateVal.Size = new System.Drawing.Size(0, 18);
+            this.lblSaleDateVal.TabIndex = 85;
+            // 
+            // lblBalanceDueVal
+            // 
+            this.lblBalanceDueVal.AutoSize = true;
+            this.lblBalanceDueVal.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBalanceDueVal.ForeColor = System.Drawing.Color.Red;
+            this.lblBalanceDueVal.Location = new System.Drawing.Point(123, 295);
+            this.lblBalanceDueVal.Name = "lblBalanceDueVal";
+            this.lblBalanceDueVal.Size = new System.Drawing.Size(0, 26);
+            this.lblBalanceDueVal.TabIndex = 85;
             // 
             // FormPOS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 342);
+            this.ClientSize = new System.Drawing.Size(480, 341);
+            this.Controls.Add(this.lblTotalVal);
+            this.Controls.Add(this.lblBalanceDueVal);
+            this.Controls.Add(this.lblSaleDateVal);
+            this.Controls.Add(this.lblTaxVal);
+            this.Controls.Add(this.lblSubTotalVal);
+            this.Controls.Add(this.lblSaleDate);
             this.Controls.Add(this.btnVoidItem);
             this.Controls.Add(this.btnPrintReceipt);
             this.Controls.Add(this.tbQuantity);
             this.Controls.Add(this.lblQuantity);
-            this.Controls.Add(this.tbTotal);
-            this.Controls.Add(this.tbTax);
-            this.Controls.Add(this.tbSubtotal);
+            this.Controls.Add(this.lblBalanceDue);
             this.Controls.Add(this.lblFinalTotal);
             this.Controls.Add(this.lblTax);
-            this.Controls.Add(this.btnVoidSale);
             this.Controls.Add(this.btnMakePayment);
             this.Controls.Add(this.lblSubtotal);
+            this.Controls.Add(this.btnNewSale);
             this.Controls.Add(this.btnChangeQuantity);
             this.Controls.Add(this.dgItemLine);
             this.Controls.Add(this.tbItemNo);
             this.Controls.Add(this.lblItemNo);
             this.Name = "FormPOS";
             this.Text = "CPSC462 POS";
+            this.Activated += new System.EventHandler(this.FormPOS_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.dgItemLine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.salesLineItemBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,22 +372,25 @@
         private System.Windows.Forms.Button btnChangeQuantity;
         private System.Windows.Forms.Label lblSubtotal;
         private System.Windows.Forms.Button btnMakePayment;
-        private System.Windows.Forms.Button btnVoidSale;
         private System.Windows.Forms.Label lblTax;
         private System.Windows.Forms.Label lblFinalTotal;
-        private System.Windows.Forms.TextBox tbSubtotal;
-        private System.Windows.Forms.TextBox tbTax;
-        private System.Windows.Forms.TextBox tbTotal;
         private System.Windows.Forms.Label lblQuantity;
         private System.Windows.Forms.TextBox tbQuantity;
         private System.Windows.Forms.Button btnPrintReceipt;
         private System.Windows.Forms.Button btnVoidItem;
-        private System.Windows.Forms.BindingSource salesLineItemBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productPriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subtotalDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.Button btnNewSale;
+        private System.Windows.Forms.Label lblSaleDate;
+        private System.Windows.Forms.Label lblBalanceDue;
+        private System.Windows.Forms.Label lblSubTotalVal;
+        private System.Windows.Forms.Label lblTaxVal;
+        private System.Windows.Forms.Label lblTotalVal;
+        private System.Windows.Forms.Label lblSaleDateVal;
+        private System.Windows.Forms.Label lblBalanceDueVal;
     }
 }
 
